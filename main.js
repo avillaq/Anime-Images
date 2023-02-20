@@ -68,4 +68,4 @@ botonVerNSFW.addEventListener('click', () => {
     cargarLink('nsfw', nsfw.value)
 });
 
-
+/** */
