@@ -83,13 +83,8 @@ function init() {
             typeSFW.classList.add("selected");
             typeNSFW.classList.remove("selected");
 
-            container_sfw.classList.remove("hidden");
             container_sfw.classList.add("visible");
-
             container_nsfw.classList.remove("visible");
-            container_nsfw.classList.add("hidden");
-
-
         }
     })
     typeNSFW.addEventListener('click', function(e){
@@ -98,12 +93,8 @@ function init() {
             typeNSFW.classList.add("selected");
             typeSFW.classList.remove("selected");
 
-            container_nsfw.classList.remove("hidden");
             container_nsfw.classList.add("visible");
-
             container_sfw.classList.remove("visible");
-            container_sfw.classList.add("hidden");
-
         }
     })
 

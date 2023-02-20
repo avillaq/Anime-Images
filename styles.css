@@ -25,17 +25,10 @@ img {
     width: 95%;
     height: 95%;
     margin: 0 auto; /*Contenedor centrado*/
-    
-}
-
-div{
     text-align: center;
 }
 
 
-.container-nsfw{
-    display: none;
-}
 
 /*Encabezado*/
 .side-header{
@@ -43,6 +36,7 @@ div{
     grid-template-columns: 1fr 10fr;
     color: white;
     padding: 10px 0 10px 10px;
+    text-align: center;
 }
 .title h1{
     margin: 0;
@@ -63,6 +57,7 @@ div{
     display: grid;
     grid-template-columns: 1fr 1fr;
     background-color: #303030;
+    text-align: center;
 }
 .btn{
     display: inline-block;
@@ -76,15 +71,20 @@ div{
 
 }
 
+/*Selectores*/
+.container-nsfw{
+    display: none;
+}
+.container-sfw{
+    display: none;
+}
 
 /*Control*/
 .visible{
     display: inline-block;
 }
-.hidden{
-    display: none;
-}
 .selected{
     border-bottom: 2px solid white;
     background-color: #121212;
 }
+
