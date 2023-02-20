@@ -71,12 +71,26 @@ function init() {
     });
 
     /**Mostraremos la lista de categorias de acuerdo al tipo de elija*/
+
     const typeSFW = document.querySelector("#typeSFW");
     const typeNSFW = document.querySelector("#typeNSFW");
 
-    typeSFW.addEventListener('click', function(){
-        
+    typeSFW.addEventListener('click', function(e){
+       
+        if(!typeSFW.classList.contains("selected")){
+            typeSFW.classList.add("selected");
+            typeNSFW.classList.remove("selected");
+        }
     })
+    typeNSFW.addEventListener('click', function(e){
+        e.preventDefault();
+        if(!typeNSFW.classList.contains("selected")){
+            typeNSFW.classList.add("selected");
+            typeSFW.classList.remove("selected");
+        }
+    })
+
+
 
 
 

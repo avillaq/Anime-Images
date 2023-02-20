@@ -39,6 +39,11 @@ div{
 .hidden{
     display: none;
 }
+.selected{
+    border-bottom: 2px solid white;
+    background-color: #121212;
+}
+
 
 /*Encabezado*/
 .side-header{
@@ -60,7 +65,6 @@ div{
 .icon:hover{
     cursor: pointer;
     background-color: #303030;
-    
 }
 
 .navegation{
@@ -74,11 +78,7 @@ div{
     color: white;
     transition: background-color .3s ease-in-out;
 }
-.selected{
-    border-bottom: 2px solid white;
-    background-color: #121212;
 
-}
 .btn:hover{
     background-color: #121212;
 
