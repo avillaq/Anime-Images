@@ -41,6 +41,11 @@ function init() {
     const botonVerSFW = document.getElementById('botonVerSFW');
     const botonVerNSFW = document.getElementById('botonVerNSFW');
 
+    const btnDownload = document.querySelector("#btn-download");
+
+
+
+    $btnDescargar = document.querySelector("#btnDescargar");
     //Referencia : https://www.youtube.com/watch?v=PNr8-JDMinU
     const cargarLink = async (type, tag) => {
         try {
@@ -49,17 +54,23 @@ function init() {
 
             if (respuesta.status === 200) {
                 const datos = await respuesta.json();
-                //console.log(datos.url);
+                
+                //Enlace a la imagen orignal
                 document.getElementById("campoLink").href = datos.url;
 
+                //Imagen
+                document.getElementById("campoImage").src = datos.url;
+
+                
                 //Esperamos que la imagen este completamente cargada paro mostrar el boton de descarga 
                 document.getElementById("campoImage").onload = function () {
                     document.querySelector("#container-download").classList.add("visible-download");
                 }
-
-                document.getElementById("campoImage").src = datos.url;
                 
-            
+                
+                btnDownload.setAttribute("href",datos.url);
+                btnDownload.setAttribute("download","imagen.png");
+
                 
                 console.log(datos.url);
 
