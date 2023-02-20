@@ -35,8 +35,8 @@ function init() {
 
     //---------------------Metodo con async y fetch para consumir una api - (linea 36 - 69)------------------------------------
 
-    const sfw = document.querySelector(".selectSFW");
-    const nsfw = document.querySelector(".selectNSFW");
+    const sfw = document.querySelector("#selectSFW");
+    const nsfw = document.querySelector("#selectNSFW");
 
     const botonVerSFW = document.getElementById('botonVerSFW');
     const botonVerNSFW = document.getElementById('botonVerNSFW');
@@ -74,19 +74,36 @@ function init() {
 
     const typeSFW = document.querySelector("#typeSFW");
     const typeNSFW = document.querySelector("#typeNSFW");
+    const container_sfw = document.querySelector("#container-sfw");
+    const container_nsfw = document.querySelector("#container-nsfw");
 
     typeSFW.addEventListener('click', function(e){
        
         if(!typeSFW.classList.contains("selected")){
             typeSFW.classList.add("selected");
             typeNSFW.classList.remove("selected");
+
+            container_sfw.classList.remove("hidden");
+            container_sfw.classList.add("visible");
+
+            container_nsfw.classList.remove("visible");
+            container_nsfw.classList.add("hidden");
+
+
         }
     })
     typeNSFW.addEventListener('click', function(e){
-        e.preventDefault();
+
         if(!typeNSFW.classList.contains("selected")){
             typeNSFW.classList.add("selected");
             typeSFW.classList.remove("selected");
+
+            container_nsfw.classList.remove("hidden");
+            container_nsfw.classList.add("visible");
+
+            container_sfw.classList.remove("visible");
+            container_sfw.classList.add("hidden");
+
         }
     })
 

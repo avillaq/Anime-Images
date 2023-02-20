@@ -32,18 +32,10 @@ div{
     text-align: center;
 }
 
-/*Control*/
-.visible{
-    display: inline-block;
-}
-.hidden{
+
+.container-nsfw{
     display: none;
 }
-.selected{
-    border-bottom: 2px solid white;
-    background-color: #121212;
-}
-
 
 /*Encabezado*/
 .side-header{
@@ -85,4 +77,14 @@ div{
 }
 
 
-  
+/*Control*/
+.visible{
+    display: inline-block;
+}
+.hidden{
+    display: none;
+}
+.selected{
+    border-bottom: 2px solid white;
+    background-color: #121212;
+}
