@@ -12,7 +12,8 @@ body {
     line-height: 2; /*Interlineado*/
     margin: 0;
     padding: 0;
-    background-color: #1e1e1e;
+    background-color: #505050;
+
 
 }
 img {
@@ -30,6 +31,7 @@ img {
 div{
     text-align: center;
 }
+
 /*Control*/
 .visible{
     display: inline-block;
@@ -56,14 +58,15 @@ div{
     align-items: center;
 }
 .icon:hover{
-    background-color: #505050;
     cursor: pointer;
+    background-color: #303030;
+    
 }
 
 .navegation{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: #505050;
+    background-color: #303030;
 }
 .btn{
     display: inline-block;
@@ -74,10 +77,11 @@ div{
 .selected{
     border-bottom: 2px solid white;
     background-color: #121212;
+
 }
 .btn:hover{
     background-color: #121212;
-    border-bottom: 2px solid white;
+
 }
 
 
