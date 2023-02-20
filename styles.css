@@ -24,7 +24,7 @@ img {
 .contenedor {
     width: 95%;
     height: 95%;
-    margin: 0 auto; /*Contenedor centrado*/
+    margin: 0 auto 2rem auto; /*Contenedor centrado*/
     text-align: center;
 }
 
@@ -79,6 +79,35 @@ img {
     display: none;
 }
 
+/*Imagen*/
+.container-img{
+    margin: 2rem 0;
+}
+
+/*Boton descarga*/
+.container-download{
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.btn-download{
+    display: flex;
+    text-decoration: none;
+    font-size: 2rem;
+    padding: 0 2rem;
+    color: white;
+    border-radius: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+}
+
+.btn-download span{
+    margin-left: 1rem;
+    font-size: 2rem;
+}
+
+
 /*Control*/
 .visible{
     display: inline-block;
@@ -87,4 +116,6 @@ img {
     border-bottom: 2px solid white;
     background-color: #121212;
 }
-
+.visible-download{
+    display: flex;
+}

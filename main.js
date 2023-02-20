@@ -50,9 +50,17 @@ function init() {
             if (respuesta.status === 200) {
                 const datos = await respuesta.json();
                 //console.log(datos.url);
-                document.getElementById("campoImage").src = datos.url;
                 document.getElementById("campoLink").href = datos.url;
 
+                //Esperamos que la imagen este completamente cargada paro mostrar el boton de descarga 
+                document.getElementById("campoImage").onload = function () {
+                    document.querySelector("#container-download").classList.add("visible-download");
+                }
+
+                document.getElementById("campoImage").src = datos.url;
+                
+            
+                
                 console.log(datos.url);
 
             }
