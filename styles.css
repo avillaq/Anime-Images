@@ -1,0 +1,75 @@
+/*Añadir normalize.css al proyecto para mejores resultados*/
+*,*:before,*:after {
+    box-sizing: inherit;
+}
+html {
+    box-sizing: border-box;
+    font-size:62.5%; /*1rem = 10px*/
+}
+body {
+    font-family: 'Open Sans', 'sans-serif';
+    font-size: 1.6rem;
+    line-height: 2; /*Interlineado*/
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+
+}
+img {
+    max-width: 100%; /*Imagen responsiva*/
+    width: 100%;
+    display: block;
+}
+.contenedor {
+    width: 95%;
+    height: 95%;
+    margin: 0 auto; /*Contenedor centrado*/
+    
+}
+
+div{
+    text-align: center;
+}
+/*Encabezado*/
+.side-header{
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    color: white;
+    padding: 10px 0 10px 10px;
+}
+.title h1{
+    margin: 0;
+}
+.icon{
+    transition: background-color .3s ease-in-out;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon:hover{
+    background-color: #505050;
+    cursor: pointer;
+}
+
+.navegation{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #505050;
+}
+.btn{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    transition: background-color .3s ease-in-out;
+}
+.selected{
+    border-bottom: 2px solid white;
+    background-color: #121212;
+}
+.btn:hover{
+    background-color: #121212;
+    border-bottom: 2px solid white;
+} 
+
+  
