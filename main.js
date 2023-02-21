@@ -35,14 +35,18 @@ function init() {
 
     //---------------------Metodo con async y fetch para consumir una api - (linea 36 - 69)------------------------------------
 
+    /** Categoria*/
     const sfw = document.querySelector("#selectSFW");
     const nsfw = document.querySelector("#selectNSFW");
 
-    const botonVerSFW = document.getElementById('botonVerSFW');
-    const botonVerNSFW = document.getElementById('botonVerNSFW');
+    /** Botones para mostrar la imagen */
+    const botonVerSFW = document.querySelector('#botonVerSFW');
+    const botonVerNSFW = document.querySelector('#botonVerNSFW');
+
+    /**Imagen */
+    const image = document.querySelector("#campoImage");
 
     const btnDownload = document.querySelector("#btn-download");
-
 
 
     $btnDescargar = document.querySelector("#btnDescargar");
@@ -54,25 +58,22 @@ function init() {
 
             if (respuesta.status === 200) {
                 const datos = await respuesta.json();
+                const urlImage = datos.url;
                 
-                //Enlace a la imagen orignal
-                document.getElementById("campoLink").href = datos.url;
-
-                //Imagen
-                document.getElementById("campoImage").src = datos.url;
-
+                //Añadimos la url a la imagen y se empieza a cargar
+                image.src = urlImage;
                 
                 //Esperamos que la imagen este completamente cargada paro mostrar el boton de descarga 
-                document.getElementById("campoImage").onload = function () {
+                image.onload = function () {
                     document.querySelector("#container-download").classList.add("visible-download");
                 }
                 
                 
-                btnDownload.setAttribute("href",datos.url);
+                btnDownload.setAttribute("href",urlImage);
                 btnDownload.setAttribute("download","imagen.png");
 
                 
-                console.log(datos.url);
+                console.log(urlImage);
 
             }
 
@@ -89,8 +90,8 @@ function init() {
         cargarLink('nsfw', nsfw.value)
     });
 
-    /**Mostraremos la lista de categorias de acuerdo al tipo de elija*/
 
+    /**Mostraremos la lista de categorias de acuerdo al tipo de elija*/
     const typeSFW = document.querySelector("#typeSFW");
     const typeNSFW = document.querySelector("#typeNSFW");
     const container_sfw = document.querySelector("#container-sfw");
