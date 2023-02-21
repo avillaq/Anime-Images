@@ -31,23 +31,16 @@ img {
 
 
 /*Encabezado*/
-.side-header{
-    display: grid;
-    grid-template-columns: 1fr 10fr;
+.side-header{ 
     color: white;
     padding: 10px 0 10px 10px;
     text-align: center;
+    font-size: 2.5rem;
 }
 .title h1{
     margin: 0;
 }
-.icon{
-    transition: background-color .3s ease-in-out;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 .icon:hover{
     cursor: pointer;
     background-color: #303030;
@@ -63,6 +56,7 @@ img {
     display: inline-block;
     text-decoration: none;
     color: white;
+    padding: 1rem 0;
     transition: background-color .3s ease-in-out;
 }
 
@@ -74,9 +68,12 @@ img {
 /*Selectores*/
 .container-nsfw{
     display: none;
+    margin-top: 1.5rem;
+    
 }
 .container-sfw{
     display: none;
+    margin-top: 1.5rem;
 }
 
 /*Imagen*/
@@ -87,34 +84,18 @@ img {
 /*Boton descarga*/
 .container-tools{
     display: none;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    
 }
-.btn-download{
-    display: flex;
-    text-decoration: none;
-    padding: 0 2rem;
-    color: white;
-    font-size: 2rem;
-    border-radius: 2.5rem;
-    justify-content: center;
-    align-items: center;
-    background-color: green;
-}
-.btn-download span{
-    margin-left: 1rem;
-   
-}
-.btn-favorite{
+
+.btn-favorite,.btn-home, .btn-link{
     display: inline-block;
-    margin-left: 2.5rem;
+    /* margin-left: 2.5rem; */
     font-size: 3.5rem;
     color: white;
 }
-
 .fill{
-    background-color: red;
+    color: red;
 }
 
 /*Control*/
@@ -131,23 +112,24 @@ img {
     display: flex;
 }
 /*Opciones de categoria*/
-.opciones,.btnVer{
+.selectSFW, .selectNSFW,.btnVer{
     cursor: pointer;
     color: white;
 }
-.opciones {
+.selectSFW, .selectNSFW {
     border: 0;
     outline: 0;
     background: #485761;
-    padding: 4px 0;
-    text-align: center;
+    padding: 4px 4px;
     border-radius: 9px;
     width: 12rem;
-    font-size: 1.6rem;
+    font-size: 2rem;
+    text-align: center;
+
 }
 
 .btnVer{
     display: inline-block;
-    margin-left: 1rem;
-    font-size: 2.4rem;
+    margin-left: 3rem;
+    font-size: 3rem;
 }

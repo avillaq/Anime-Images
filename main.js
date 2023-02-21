@@ -46,9 +46,9 @@ function init() {
     /**Imagen */
     const image = document.querySelector("#campoImage");
 
-    const btnDownload = document.querySelector("#btn-download");
+    const btnLink = document.querySelector("#btn-link");
     const btnFavorite = document.querySelector("#btn-favorite");
-
+    const iconFavorite = btnFavorite.firstChild;
 
     //botonVerSFW.addEventListener('click', cargarLink(sfw.value)); ERROR: Hacerlo de esta manera, ejecuta la funcion cargarlink() sin presionar el boton 
     botonVerSFW.addEventListener('click', function(e) {
@@ -59,6 +59,20 @@ function init() {
         e.preventDefault();
         cargarLink('nsfw', nsfw.value)
     });
+
+    btnFavorite.addEventListener("click", function(e) {
+        e.preventDefault();
+        if(iconFavorite.classList.contains("fa-regular")){
+            iconFavorite.classList.remove("fa-regular");
+            iconFavorite.classList.add("fa-solid")
+            iconFavorite.classList.add("fill");
+
+        }else{
+            iconFavorite.classList.remove("fa-solid");
+            iconFavorite.classList.remove("fill");
+            iconFavorite.classList.add("fa-regular")
+        }
+    })
 
     //Referencia : https://www.youtube.com/watch?v=PNr8-JDMinU
     const cargarLink = async (type, tag) => {
@@ -79,11 +93,11 @@ function init() {
                 }
                 
                 
-                btnDownload.setAttribute("href",urlImage);
-                btnDownload.setAttribute("download","imagen.png");
+                btnLink.setAttribute("href",urlImage);
 
-                
-                
+                iconFavorite.classList.remove("fa-solid");
+                iconFavorite.classList.add("fa-regular")
+
                 console.log(urlImage);
 
             }
