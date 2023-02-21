@@ -25,9 +25,7 @@ img {
     width: 95%;
     height: 95%;
     margin: 0 auto 2rem auto; /*Contenedor centrado*/
-    display: flex;
-    justify-content: center;
-    align-items: center;    
+  text-align: center;
 }
 
 
@@ -87,57 +85,69 @@ img {
 }
 
 /*Boton descarga*/
-.container-download{
+.container-tools{
     display: none;
     justify-content: center;
     align-items: center;
+    
 }
 .btn-download{
     display: flex;
     text-decoration: none;
-    font-size: 2rem;
     padding: 0 2rem;
     color: white;
+    font-size: 2rem;
     border-radius: 2.5rem;
     justify-content: center;
     align-items: center;
     background-color: green;
 }
-
 .btn-download span{
     margin-left: 1rem;
-    font-size: 2rem;
+   
+}
+.btn-favorite{
+    display: inline-block;
+    margin-left: 2.5rem;
+    font-size: 3.5rem;
+    color: white;
 }
 
+.fill{
+    background-color: red;
+}
 
 /*Control*/
 .visible{
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .selected{
     border-bottom: 2px solid white;
     background-color: #121212;
 }
-.visible-download{
+.visible-tools{
     display: flex;
 }
 /*Opciones de categoria*/
 .opciones,.btnVer{
-    border: 0;
     cursor: pointer;
+    color: white;
+}
+.opciones {
+    border: 0;
+    outline: 0;
+    background: #485761;
+    padding: 4px 0;
+    text-align: center;
+    border-radius: 9px;
+    width: 12rem;
     font-size: 1.6rem;
 }
-.opciones{
-    text-align: center;
-    width: 12rem;
-    height: 2.4rem;
-    margin-right: -4.5rem;
-    padding-right: 1.6rem;
 
-}
 .btnVer{
-    border-left: 2px solid black;
-    height: 2.2rem;
-    background-color: white;
-    
+    display: inline-block;
+    margin-left: 1rem;
+    font-size: 2.4rem;
 }

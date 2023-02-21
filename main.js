@@ -47,9 +47,19 @@ function init() {
     const image = document.querySelector("#campoImage");
 
     const btnDownload = document.querySelector("#btn-download");
+    const btnFavorite = document.querySelector("#btn-favorite");
 
 
-    $btnDescargar = document.querySelector("#btnDescargar");
+    //botonVerSFW.addEventListener('click', cargarLink(sfw.value)); ERROR: Hacerlo de esta manera, ejecuta la funcion cargarlink() sin presionar el boton 
+    botonVerSFW.addEventListener('click', function(e) {
+        e.preventDefault();
+        cargarLink('sfw', sfw.value)
+    });
+    botonVerNSFW.addEventListener('click', function(e) {
+        e.preventDefault();
+        cargarLink('nsfw', nsfw.value)
+    });
+
     //Referencia : https://www.youtube.com/watch?v=PNr8-JDMinU
     const cargarLink = async (type, tag) => {
         try {
@@ -65,13 +75,14 @@ function init() {
                 
                 //Esperamos que la imagen este completamente cargada paro mostrar el boton de descarga 
                 image.onload = function () {
-                    document.querySelector("#container-download").classList.add("visible-download");
+                    document.querySelector("#container-tools").classList.add("visible-tools");
                 }
                 
                 
                 btnDownload.setAttribute("href",urlImage);
                 btnDownload.setAttribute("download","imagen.png");
 
+                
                 
                 console.log(urlImage);
 
@@ -82,13 +93,7 @@ function init() {
         }
 
     }
-    //botonVerSFW.addEventListener('click', cargarLink(sfw.value)); ERROR: Hacerlo de esta manera, ejecuta la funcion cargarlink() sin presionar el boton 
-    botonVerSFW.addEventListener('click', () => {
-        cargarLink('sfw', sfw.value)
-    });
-    botonVerNSFW.addEventListener('click', () => {
-        cargarLink('nsfw', nsfw.value)
-    });
+    
 
 
     /**Mostraremos la lista de categorias de acuerdo al tipo de elija*/
