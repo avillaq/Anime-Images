@@ -71,6 +71,17 @@ function init() {
             iconFavorite.classList.add("fa-regular")
         }
     })
+    const slideDown = function(element){ 
+        if(element.scrollHeight>0){
+            element.style.height = `${element.scrollHeight}px`
+        }else{
+            element.style.height = `0px`
+        }
+    };
+
+    document.getElementById("btn-about").addEventListener("click", function () {
+        slideDown(document.getElementById("container-footer"));
+    });
 
     //Referencia : https://www.youtube.com/watch?v=PNr8-JDMinU
     const cargarLink = async (type, tag) => {

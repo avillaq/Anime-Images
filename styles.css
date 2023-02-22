@@ -24,7 +24,7 @@ img {
 .contenedor {
     width: 95%;
     height: 95%;
-    margin: 0 auto 2rem auto; /*Contenedor centrado*/
+    margin: 0 auto; /*Contenedor centrado*/
     text-align: center;
 }
 
@@ -39,11 +39,6 @@ img {
 }
 .title h1{
     margin: 0;
-}
-
-.icon:hover{
-    cursor: pointer;
-    background-color: #303030;
 }
 
 .navegation{
@@ -92,6 +87,7 @@ img {
     display: inline-block;
     font-size: 3.5rem;
     color: white;
+    cursor: pointer;
 }
 .btn-favorite{
     color: red;
@@ -133,21 +129,32 @@ img {
     font-size: 3rem;
 }
 
-/*Introduccion*//*//////////////////////////////////////////////////////////////*/
-.introduction {
-    border: 3px solid #485761;
-    border-radius: 10px;
-    color: white;
-}
-
 
 /*Footer*/
+@media (min-width: 768px){
+    footer.contenedor{
+        width: 70%;
+    }
+}
+@media (min-width: 992px){
+    footer.contenedor{
+        width: 60%;
+    }
+}
+/*Contenedor servira para slideDown y slideUp*/
+.container-footer{
+    margin-bottom: 1rem;
+    transition:height 1s ease-out;
+    height:0;
+    overflow:hidden;
+}
+
 .container-about{
     text-align: start;
     color: white;
+    margin: 2rem 0;
 }
-h3{
-    text-transform: uppercase;
+h3,p{
     margin: 0;
 }
 .container-media{
@@ -156,9 +163,9 @@ h3{
     border-top: 1px solid white;
 }
 .container-copyright{
-    
     color: white;
 }
 .container-copyright span{
     font-weight: bolder;
 }
+
