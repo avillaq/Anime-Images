@@ -25,7 +25,7 @@ img {
     width: 95%;
     height: 95%;
     margin: 0 auto 2rem auto; /*Contenedor centrado*/
-  text-align: center;
+    text-align: center;
 }
 
 
@@ -57,7 +57,7 @@ img {
     text-decoration: none;
     color: white;
     padding: 1rem 0;
-    transition: background-color .3s ease-in-out;
+    transition: backgrounp-color .3s ease-in-out;
 }
 
 .btn:hover{
@@ -88,13 +88,12 @@ img {
     align-items: center;
 }
 
-.btn-favorite,.btn-home, .btn-link{
+.btn-favorite,.btn-about, .btn-link,.btn-media{
     display: inline-block;
-    /* margin-left: 2.5rem; */
     font-size: 3.5rem;
     color: white;
 }
-.fill{
+.btn-favorite{
     color: red;
 }
 
@@ -106,7 +105,7 @@ img {
 }
 .selected{
     border-bottom: 2px solid white;
-    background-color: #121212;
+    background-color: back;
 }
 .visible-tools{
     display: flex;
@@ -132,4 +131,34 @@ img {
     display: inline-block;
     margin-left: 3rem;
     font-size: 3rem;
+}
+
+/*Introduccion*//*//////////////////////////////////////////////////////////////*/
+.introduction {
+    border: 3px solid #485761;
+    border-radius: 10px;
+    color: white;
+}
+
+
+/*Footer*/
+.container-about{
+    text-align: start;
+    color: white;
+}
+h3{
+    text-transform: uppercase;
+    margin: 0;
+}
+.container-media{
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid white;
+}
+.container-copyright{
+    
+    color: white;
+}
+.container-copyright span{
+    font-weight: bolder;
 }

@@ -65,11 +65,9 @@ function init() {
         if(iconFavorite.classList.contains("fa-regular")){
             iconFavorite.classList.remove("fa-regular");
             iconFavorite.classList.add("fa-solid")
-            iconFavorite.classList.add("fill");
 
         }else{
             iconFavorite.classList.remove("fa-solid");
-            iconFavorite.classList.remove("fill");
             iconFavorite.classList.add("fa-regular")
         }
     })
