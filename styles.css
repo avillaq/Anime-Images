@@ -13,6 +13,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #505050;
+
 }
 img {
     max-width: 100%; /*Imagen responsiva*/
@@ -27,8 +28,8 @@ img {
 }
 
 
-
 /*Encabezado*/
+
 .side-header{ 
     color: white;
     padding: 10px 0 10px 10px;
@@ -50,7 +51,7 @@ img {
     text-decoration: none;
     color: white;
     padding: 1rem 0;
-    transition: backgrounp-color .3s ease-in-out;
+    transition: background-color .3s ease-in-out;
 }
 
 .btn:hover{
@@ -68,41 +69,6 @@ img {
     margin-top: 1.5rem;
 }
 
-/*Imagen*/
-.container-img{
-    margin: 2rem 0;
-}
-
-/*Boton descarga*/
-.container-tools{
-    display: none;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.btn-favorite,.btn-about, .btn-link,.btn-media{
-    display: inline-block;
-    font-size: 3.5rem;
-    color: white;
-    cursor: pointer;
-}
-.btn-favorite{
-    color: red;
-}
-
-/*Control*/
-.visible{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.selected{
-    border-bottom: 2px solid white;
-    background-color: back;
-}
-.visible-tools{
-    display: flex;
-}
 /*Opciones de categoria*/
 .selectSFW, .selectNSFW,.btnVer{
     cursor: pointer;
@@ -117,7 +83,6 @@ img {
     width: 12rem;
     font-size: 2rem;
     text-align: center;
-
 }
 
 .btnVer{
@@ -126,23 +91,33 @@ img {
     font-size: 3rem;
 }
 
-
-/*Footer*/
-/*@media (min-width: 768px){
-    footer.contenedor{
-        width: 70%;
-    }
+/*Imagen*/
+.container-img{
+    margin: 2rem 0;
 }
-@media (min-width: 992px){
-    footer.contenedor{
-        width: 60%;
-    }
-}*/
-/*Contenedor servira para slideDown y slideUp*/
-.container-footer{
+
+/*Contenedor de enlace, favorito y Acerca de...*/
+.container-tools{
+    display: none;
+    justify-content: space-around;
+    align-items: center;
     color: white;
 }
 
+.btn-favorite,.btn-about, .btn-link,.btn-media{
+    display: inline-block;
+    font-size: 3.5rem;
+    color: white;
+    cursor: pointer;
+}
+.btn-favorite{
+    color: red;
+}
+
+/*Contenedor mostrar la ventana */
+.container-footer{
+    color: white;
+}
 
 .container-about{
     margin: 2rem 0;
@@ -168,6 +143,7 @@ img {
     font-weight: bolder;
 }
 
+/* Ajustes de tamalo de letra para pantallas mas grandes*/
 @media (min-width: 600px){
     .container-about h3{
         font-size: 3rem;
@@ -184,4 +160,16 @@ img {
 }
 
 
-
+/*Control*/
+.visible{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selected{
+    border-bottom: 2px solid white;
+    background-color: black;
+}
+.visible-tools{
+    display: flex;
+}
