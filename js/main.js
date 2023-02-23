@@ -51,13 +51,35 @@ function init() {
     const iconFavorite = btnFavorite.firstChild;
 
     //botonVerSFW.addEventListener('click', cargarLink(sfw.value)); ERROR: Hacerlo de esta manera, ejecuta la funcion cargarlink() sin presionar el boton 
+
     botonVerSFW.addEventListener('click', function(e) {
-        e.preventDefault();
-        cargarLink('sfw', sfw.value)
+        if(!navigator.onLine){
+            Swal.fire({
+                icon: 'warning',
+                title: 'No Internet Connection',
+                background:"#485761",
+                color: '#fff',
+                showConfirmButton: false
+              })
+        }else{
+            e.preventDefault();
+            cargarLink('sfw', sfw.value)
+        }
     });
     botonVerNSFW.addEventListener('click', function(e) {
-        e.preventDefault();
-        cargarLink('nsfw', nsfw.value)
+  
+        if(!navigator.onLine){
+            Swal.fire({
+                icon: 'warning',
+                title: 'No Internet Connection',
+                background:"#485761",
+                color: '#fff',
+                showConfirmButton: false
+              })
+        }else{
+            e.preventDefault();
+            cargarLink('nsfw', nsfw.value)
+        }
     });
 
     btnFavorite.addEventListener("click", function(e) {
@@ -65,6 +87,7 @@ function init() {
         if(iconFavorite.classList.contains("fa-regular")){
             iconFavorite.classList.remove("fa-regular");
             iconFavorite.classList.add("fa-solid")
+            
 
         }else{
             iconFavorite.classList.remove("fa-solid");
