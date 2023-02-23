@@ -13,8 +13,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #505050;
-
-
 }
 img {
     max-width: 100%; /*Imagen responsiva*/
@@ -57,7 +55,6 @@ img {
 
 .btn:hover{
     background-color: #121212;
-
 }
 
 /*Selectores*/
@@ -131,7 +128,7 @@ img {
 
 
 /*Footer*/
-@media (min-width: 768px){
+/*@media (min-width: 768px){
     footer.contenedor{
         width: 70%;
     }
@@ -140,32 +137,51 @@ img {
     footer.contenedor{
         width: 60%;
     }
-}
+}*/
 /*Contenedor servira para slideDown y slideUp*/
 .container-footer{
-    margin-bottom: 1rem;
-    transition:height 1s ease-out;
-    height:0;
-    overflow:hidden;
+    color: white;
 }
 
+
 .container-about{
-    text-align: start;
-    color: white;
     margin: 2rem 0;
 }
-h3,p{
-    margin: 0;
+
+.container-about h3{
+    font-weight: bolder;
+    font-size: 2rem;
 }
+.container-about p{
+    margin: 0;
+    text-align: start;
+    font-size: 1.4rem;
+}
+
 .container-media{
     display: flex;
     justify-content: space-evenly;
     border-top: 1px solid white;
-}
-.container-copyright{
-    color: white;
+    padding: 1.5rem 0;
 }
 .container-copyright span{
     font-weight: bolder;
 }
+
+@media (min-width: 600px){
+    .container-about h3{
+        font-size: 3rem;
+    }
+    .container-about p{
+        font-size: 2rem;
+    }
+    .swal2-popup{
+        width: 45em !important;
+    }
+    .container-copyright{
+        font-size: 1.6rem;
+    }
+}
+
+
 

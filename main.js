@@ -80,7 +80,30 @@ function init() {
     };
 
     document.getElementById("btn-about").addEventListener("click", function () {
-        slideDown(document.getElementById("container-footer"));
+        //slideDown(document.getElementById("container-footer"));
+        //swal();
+
+        Swal.fire({
+            html: `<div class="container-footer" id="container-footer">
+            <div class="container-about">
+                <h3>Sobre el Proyecto</h3>    
+                <p>¡Bienvenidos a mi proyecto! Aqui podrás disfrutar de imágenes de anime aleatorias obtenidas de una API .Este proyecto fue una gran oportunidad para aplicar mis conocimientos en programación, y espero que disfrutes  este sitio tanto como yo disfruté creándolo.</p>
+            </div>
+            <div class="container-media">
+               
+                <a target="_blank" href="https://github.com/avillaq" class="btn-media"><i class="fa-brands fa-github"></i></a>
+                
+                <a target="_blank" href="https://www.facebook.com/profile.php?id=100008164993137" class="btn-media"><i class="fa-brands fa-facebook"></i></a>
+                <a target="_blank" href="mailto:villafuertequispealex@gmail.com" class="btn-media"><i class="fa-brands fa-google-plus"></i></a>
+            </div>
+            <div class="container-copyright">
+                <small>&copy;2023 <span>Alexander</span> - All Rights Reserved</small>
+            </div>
+        </div>`,
+        background:"#485761",
+        showConfirmButton: false
+        })
+
     });
 
     //Referencia : https://www.youtube.com/watch?v=PNr8-JDMinU
