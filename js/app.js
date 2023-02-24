@@ -1,39 +1,7 @@
 document.addEventListener('DOMContentLoaded', init);
 function init() {
-    //---------------------Metodo antiguo para consumir una api - (linea 2 - 32)------------------------------------
-    /*const sfw = document.querySelector(".selectSFW");
-    const nsfw = document.querySelector(".selectNSFW");
-    
-    const botonVerSFW = document.getElementById('botonVerSFW');
-    const botonVerNSFW = document.getElementById('botonVerNSFW');
-    
-    //Como consumir API: https://www.youtube.com/watch?v=2Xm9P_tXtK8
-    //URL de la API : https://api.waifu.pics
-    const xhr = new XMLHttpRequest();
-    
-    function onRequestHandler(){
-        if(this.readyState == 4 && this.status == 200){
-            const data = JSON.parse(this.response);
-            //Obtener valor de un Json: https://es.stackoverflow.com/questions/9478/c%C3%B3mo-puedo-leer-un-campo-espec%C3%ADfico-dentro-de-un-objeto-json-que-se-encuentra-e
-            //console.log(data['url']);
-            document.getElementById("campoImage").src = data['url']; 
-            document.getElementById("campoLink").href = data['url']; 
-        }
-    }
-    function mostrarImageSFW(){
-        xhr.addEventListener("load", onRequestHandler);
-        xhr.open("GET", 'https://api.waifu.pics/sfw/'+sfw.value);
-        xhr.send();
-    }
-    function mostrarImageNSFW(){   
-        xhr.addEventListener("load", onRequestHandler);
-        xhr.open("GET", 'https://api.waifu.pics/nsfw/'+nsfw.value);
-        xhr.send();
-    }
-    botonVerSFW.addEventListener('click', mostrarImageSFW);
-    botonVerNSFW.addEventListener('click', mostrarImageNSFW);*/
 
-    //---------------------Metodo con async y fetch para consumir una api - (linea 36 - 69)------------------------------------
+    //--------------------- Fetch para consumir una api ------------------------------------
 
     /** Categoria*/
     const sfw = document.querySelector("#selectSFW");
@@ -46,12 +14,13 @@ function init() {
     /**Imagen */
     const image = document.querySelector("#campoImage");
 
+    /**Iconos de contactos */
     const btnLink = document.querySelector("#btn-link");
     const btnFavorite = document.querySelector("#btn-favorite");
     const iconFavorite = btnFavorite.firstChild;
 
-    //botonVerSFW.addEventListener('click', cargarLink(sfw.value)); ERROR: Hacerlo de esta manera, ejecuta la funcion cargarlink() sin presionar el boton 
     botonVerSFW.addEventListener('click', function(e) {
+        /**Si no estas conectado a internet, muestra un mensaje */
         if(!navigator.onLine){
             Swal.fire({
                 icon: 'warning',
@@ -66,7 +35,7 @@ function init() {
         }
     });
     botonVerNSFW.addEventListener('click', function(e) {
-  
+        /**Si no estas conectado a internet, muestra un mensaje */
         if(!navigator.onLine){
             Swal.fire({
                 icon: 'warning',
@@ -83,19 +52,18 @@ function init() {
 
     btnFavorite.addEventListener("click", function(e) {
         e.preventDefault();
+        /**Intercalamos entre corazon sin relleno y relleno, para el boton de favorito (corazon) */
         if(iconFavorite.classList.contains("fa-regular")){
             iconFavorite.classList.remove("fa-regular");
             iconFavorite.classList.add("fa-solid")
-            
-
         }else{
             iconFavorite.classList.remove("fa-solid");
             iconFavorite.classList.add("fa-regular")
         }
     })
 
+    /*Evento para mostrar mensaje de con informacion del proyecto */
     document.getElementById("btn-about").addEventListener("click", function () {
-
         Swal.fire({
             html: `<div class="container-footer" id="container-footer">
             <div class="container-about">
@@ -103,9 +71,7 @@ function init() {
                 <p>¡Bienvenidos a mi proyecto! Aqui podrás disfrutar de imágenes de anime aleatorias obtenidas de una API .Este proyecto fue una gran oportunidad para aplicar mis conocimientos en programación, y espero que disfrutes  este sitio tanto como yo disfruté creándolo.</p>
             </div>
             <div class="container-media">
-               
                 <a target="_blank" href="https://github.com/avillaq" class="btn-media"><i class="fa-brands fa-github"></i></a>
-                
                 <a target="_blank" href="https://www.facebook.com/profile.php?id=100008164993137" class="btn-media"><i class="fa-brands fa-facebook"></i></a>
                 <a target="_blank" href="mailto:villafuertequispealex@gmail.com" class="btn-media"><i class="fa-brands fa-google-plus"></i></a>
             </div>
@@ -135,18 +101,17 @@ function init() {
                 //Añadimos la url a la imagen y se empieza a cargar
                 image.src = urlImage;
                 
-                //Esperamos que la imagen este completamente cargada paro mostrar el boton de descarga 
+                //Esperamos que la imagen este completamente cargada para mostrar los botones de : link, favorito, Acerca de... 
                 image.onload = function () {
                     document.querySelector("#container-tools").classList.add("visible-tools");
                 }
                 
-                
+                /** Añadimos la url de la imagen al boton de link */
                 btnLink.setAttribute("href",urlImage);
 
+                /**Si el boton de favorito fue rellenada, con esto nos aseguramos que la siguiente imagen no tenga relleno*/
                 iconFavorite.classList.remove("fa-solid");
                 iconFavorite.classList.add("fa-regular")
-
-
             }
 
         } catch (error) {
@@ -154,10 +119,8 @@ function init() {
         }
 
     }
-    
 
-
-    /**Mostraremos la lista de categorias de acuerdo al tipo de elija*/
+    /**Mostraremos la lista de categorias de acuerdo al tipo (sfw o nsfw) de elija*/
     const typeSFW = document.querySelector("#typeSFW");
     const typeNSFW = document.querySelector("#typeNSFW");
     const container_sfw = document.querySelector("#container-sfw");
@@ -174,7 +137,6 @@ function init() {
         }
     })
     typeNSFW.addEventListener('click', function(e){
-
         if(!typeNSFW.classList.contains("selected")){
             typeNSFW.classList.add("selected");
             typeSFW.classList.remove("selected");
@@ -183,15 +145,4 @@ function init() {
             container_sfw.classList.remove("visible");
         }
     })
-
-
-
-
-
-
-
-
-
-
-
 }

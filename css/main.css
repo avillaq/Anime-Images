@@ -25,16 +25,15 @@ img {
     margin: 0 auto; /*Contenedor centrado*/
     text-align: center;
 }
+
 /*Fuente para los select*/
 select {
     font-family: inherit;
 }
 
-
 /*Encabezado*/
-
 .side-header{
-    color: white;
+    color: #fff;
     padding: 10px 0 10px 10px;
     text-align: center;
     font-size: 1.5rem;
@@ -62,11 +61,10 @@ select {
 .btn{
     display: inline-block;
     text-decoration: none;
-    color: white;
+    color: #fff;
     padding: 1rem 0;
     transition: background-color .3s ease-in-out;
 }
-
 .btn:hover{
     background-color: #121212;
 }
@@ -85,23 +83,22 @@ select {
 /*Opciones de categoria*/
 .selectSFW, .selectNSFW,.btnVer{
     cursor: pointer;
-    color: white;
+    color: #fff;
 }
 .selectSFW, .selectNSFW {
     border: 0;
     outline: 0;
     background: #485761;
-    padding: 4px;
+    padding: 10px;
     border-radius: 9px;
-    width: 12rem;
+    width: 14rem;
     font-size: 2rem;
     text-align: center;
 }
-
 .btnVer{
     display: inline-block;
     margin-left: 3rem;
-    font-size: 3rem;
+    font-size: 4rem;
 }
 
 /*Imagen*/
@@ -118,28 +115,25 @@ select {
     display: none;
     justify-content: space-around;
     align-items: center;
-    color: white;
+    color: #fff;
 }
-
 .btn-favorite,.btn-about, .btn-link,.btn-media{
     display: inline-block;
     font-size: 3.5rem;
-    color: white;
+    color: #fff;
     cursor: pointer;
 }
 .btn-favorite{
-    color: red;
+    color: #ff0000;
 }
 
 /*Contenedor mostrar la ventana */
 .container-footer{
-    color: white;
+    color: #fff;
 }
-
 .container-about{
     margin: 2rem 0;
 }
-
 .container-about h3{
     font-weight: 800;
     font-size: 2rem;
@@ -149,11 +143,10 @@ select {
     text-align: start;
     font-size: 1.4rem;
 }
-
 .container-media{
     display: flex;
     justify-content: space-evenly;
-    border-top: 1px solid white;
+    border-top: 1px solid #fff;
     padding: 1.5rem 0;
 }
 .container-copyright span{
@@ -193,7 +186,6 @@ select {
     }
 }
 
-
 /*Control*/
 .visible{
     display: flex;
@@ -201,8 +193,8 @@ select {
     align-items: center;
 }
 .selected{
-    border-bottom: 2px solid white;
-    background-color: black;
+    border-bottom: 2px solid #fff;
+    background-color: #000;
 }
 .visible-tools{
     display: flex;
