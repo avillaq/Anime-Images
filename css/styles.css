@@ -107,6 +107,10 @@ select {
 /*Imagen*/
 .container-img{
     margin: 2rem 0;
+    text-align: center;
+}
+.img-welcome{
+    display: inline-block;
 }
 
 /*Contenedor de enlace, favorito y Acerca de...*/
@@ -172,6 +176,20 @@ select {
     }
     .side-header{
         font-size: 2.5rem;
+    }
+    .title img{
+        width: 15%;
+    }
+    .img-welcome{
+        width: 90%;
+    }
+}
+@media (min-width: 950px){
+    .title img{
+        width: 10%;
+    }
+    .img-welcome{
+        width: 70%;
     }
 }
 

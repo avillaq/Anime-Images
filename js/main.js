@@ -51,7 +51,6 @@ function init() {
     const iconFavorite = btnFavorite.firstChild;
 
     //botonVerSFW.addEventListener('click', cargarLink(sfw.value)); ERROR: Hacerlo de esta manera, ejecuta la funcion cargarlink() sin presionar el boton 
-
     botonVerSFW.addEventListener('click', function(e) {
         if(!navigator.onLine){
             Swal.fire({
@@ -123,6 +122,9 @@ function init() {
     //Referencia : https://www.youtube.com/watch?v=PNr8-JDMinU
     const cargarLink = async (type, tag) => {
         try {
+            //Ocultamos la imagen de bienvenida
+            document.querySelector("#img-welcome").style.display="none";
+
             const respuesta = await fetch('https://api.waifu.pics/' + type + '/' + tag);
             //console.log(respuesta);
 
@@ -144,7 +146,6 @@ function init() {
                 iconFavorite.classList.remove("fa-solid");
                 iconFavorite.classList.add("fa-regular")
 
-                console.log(urlImage);
 
             }
 
