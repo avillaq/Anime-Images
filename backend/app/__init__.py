@@ -4,6 +4,7 @@ from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
+    # TODO: Configurar la aplicación con un objeto de configuración
     app.config.from_object({})
 
     db.init_app(app)
