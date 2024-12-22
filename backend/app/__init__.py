@@ -1,6 +1,5 @@
 from flask import Flask
-from app.extensions import db, limiter, cache
-from flask_cors import CORS
+from app.extensions import db, limiter, cache, cors
 
 def create_app():
     app = Flask(__name__)
@@ -9,7 +8,7 @@ def create_app():
     db.init_app(app)
     limiter.init_app(app)
     cache.init_app(app)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
 
     # Register blueprints
     from app.api import bp as api_bp
