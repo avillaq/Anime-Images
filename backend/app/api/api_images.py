@@ -79,7 +79,6 @@ WAIFU_IM_API_URL = "https://api.waifu.im/search"
 WAIFU_PICS_API_URL = "https://api.waifu.pics"
 def fetch_image(tag="waifu", type="sfw"):
     api_source = random.randint(0, 1)
-    print(f"API Source: {api_source}")
     if api_source == 0 and IMAGES_TAGS["waifu.im"][type].count(tag) > 0:
         params = {
             "included_tags": [tag],
@@ -110,3 +109,7 @@ def fetch_image(tag="waifu", type="sfw"):
         return {
             "error": "Failed to fetch image"
         }
+    
+    return {
+        "error": "Invalid tag or type"
+    }
