@@ -3,16 +3,16 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_caching import Cache
 
-# Conexión a la base de datos
+# Conection to the database
 db = SQLAlchemy()
 
-# Configuracion para limitar el número de peticiones
+# Configurations for rate limiting
 limiter = Limiter(
     get_remote_address,
     default_limits=["200/day", "50/hour"],
 )
 
-# Configuración para el cache
+# Configuration for caching
 cache = Cache(config = {
     "DEBUG": True,
     "CACHE_TYPE": "SimpleCache",
