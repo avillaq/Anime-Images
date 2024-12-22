@@ -3,7 +3,7 @@ from flask import jsonify, request
 from app.api.api_images import fetch_image, get_tags
 
 from app.api.models import User, Favorite, Download_history
-from app.extensions import db, limiter, cache
+from app.extensions import db, limiter, cache, guard
 
 @bp.route("/")
 def home():
@@ -17,7 +17,12 @@ def register():
 
 @bp.route("/auth/login", methods=["POST"])
 def login():
-    return {"login": "login"}
+    username = request.get_json(force=True).get("username", None)
+    password = request.get_json(force=True).get("password", None)
+    user = guard.authenticate(username, password)
+    return jsonify({
+        "access_token": guard.encode_jwt_token(user)
+        })
 
 @bp.route("/user/favorites", methods=["GET"])   
 def get_favorites():
