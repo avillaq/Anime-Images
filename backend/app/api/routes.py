@@ -14,7 +14,20 @@ def home():
 
 @bp.route("/auth/register", methods=["POST"])
 def register():
-    return {"register": "register"}
+    username = request.get_json(force=True).get("username", None)
+    password = request.get_json(force=True).get("password", None)
+
+    new_user = User(
+        username=username,
+        hashed_password=guard.hash_password(password),
+    )
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({
+        "access_token": guard.encode_jwt_token(new_user)
+    })
+
 
 @bp.route("/auth/login", methods=["POST"])
 def login():
@@ -23,7 +36,7 @@ def login():
     user = guard.authenticate(username, password)
     return jsonify({
         "access_token": guard.encode_jwt_token(user)
-        })
+    })
 
 @bp.route("/user/favorites", methods=["GET"])   
 @flask_praetorian.auth_required
