@@ -65,12 +65,18 @@ IMAGES_TAGS = {
         ]
     }
 }
+def get_tags():
+    sfw_tags = set(IMAGES_TAGS["waifu.im"]["sfw"] + IMAGES_TAGS["waifu.pics"]["sfw"])
+    nsfw_tags = set(IMAGES_TAGS["waifu.im"]["nsfw"] + IMAGES_TAGS["waifu.pics"]["nsfw"])
+
+    return {
+        "sfw_tags": list(sfw_tags),
+        "nsfw_tags": list(nsfw_tags)
+    }
 
 
 WAIFU_IM_API_URL = "https://api.waifu.im/search"
 WAIFU_PICS_API_URL = "https://api.waifu.pics"
-
-
 def fetch_image(tag="waifu", type="sfw"):
     api_source = random.randint(0, 1)
     print(f"API Source: {api_source}")
@@ -101,9 +107,6 @@ def fetch_image(tag="waifu", type="sfw"):
                 "image_url": data["url"],
                 "source": WAIFU_PICS_API_URL
             }
-
         return {
             "error": "Failed to fetch image"
         }
-
-
