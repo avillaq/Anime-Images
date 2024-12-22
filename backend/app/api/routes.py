@@ -1,5 +1,6 @@
 from app.api import bp
 from flask import jsonify, request
+from app.api.api_images import fetch_image, get_tags
 
 from app.api.models import User, Favorite, Download_history
 from app.extensions import db, limiter, cache
@@ -26,6 +27,14 @@ def get_favorites():
 def get_download():
     return {"download": "download"}
 
-@bp.route("/images/random", methods=["GET"])
+@bp.route("/images/random", methods=["POST"])
 def get_image():
-    return {"image": "image"}
+    type = request.get_json()["type"]
+    tag = request.get_json()["tag"]
+    image = fetch_image(tag, type)
+    return jsonify(image)
+
+@bp.route("/images/tags", methods=["GET"])
+def search_image():
+    tags = get_tags()
+    return jsonify(tags)
