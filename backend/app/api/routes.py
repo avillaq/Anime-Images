@@ -4,6 +4,7 @@ from app.api.api_images import fetch_image, get_tags
 
 from app.api.models import User, Favorite, Download_history
 from app.extensions import db, limiter, cache, guard
+import flask_praetorian
 
 @bp.route("/")
 def home():
@@ -25,6 +26,7 @@ def login():
         })
 
 @bp.route("/user/favorites", methods=["GET"])   
+@flask_praetorian.auth_required
 def get_favorites():
     return {"favorites": "favorites"}
 
