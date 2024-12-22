@@ -1,5 +1,5 @@
 from flask import Flask
-from backend.app.extensions import db, limiter, cache
+from app.extensions import db, limiter, cache
 from flask_cors import CORS
 
 def create_app():
