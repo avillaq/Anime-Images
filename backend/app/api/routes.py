@@ -29,8 +29,8 @@ def get_download():
 
 @bp.route("/images/random", methods=["POST"])
 def get_image():
-    type = request.get_json()["type"]
-    tag = request.get_json()["tag"]
+    type = request.get_json(force=True).get("type",None)
+    tag = request.get_json(force=True).get("tag",None)
     image = fetch_image(tag, type)
     return jsonify(image)
 
