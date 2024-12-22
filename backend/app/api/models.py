@@ -1,7 +1,7 @@
 from app.extensions import db
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), nullable=False)
@@ -16,9 +16,9 @@ class User(db.Model):
     
     def format(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'last_login': self.last_login
+            "id": self.id,
+            "username": self.username,
+            "last_login": self.last_login
         }
     
     @property
@@ -43,7 +43,7 @@ class User(db.Model):
         return cls.query.get(id)
 
 class Favorite(db.Model):
-    __tablename__ = 'favorites'
+    __tablename__ = "favorites"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, primary_key=True)
@@ -56,14 +56,14 @@ class Favorite(db.Model):
 
     def format(self):
         return {
-            'id': self.id,
-            'user_id': self.user_id,
-            'image_url': self.image_url,
-            'source_api': self.source_api,
+            "id": self.id,
+            "user_id": self.user_id,
+            "image_url": self.image_url,
+            "source_api": self.source_api,
         }
 
 class Download_history(db.Model):
-    __tablename__ = 'download_history'
+    __tablename__ = "download_history"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, primary_key=True)
@@ -76,9 +76,9 @@ class Download_history(db.Model):
 
     def format(self):
         return {
-            'id': self.id,
-            'user_id': self.user_id,
-            'image_url': self.image_url,
-            'downloaded_at': self.downloaded_at,
-            'ip_address': self.ip_address,
+            "id": self.id,
+            "user_id": self.user_id,
+            "image_url": self.image_url,
+            "downloaded_at": self.downloaded_at,
+            "ip_address": self.ip_address,
         }
