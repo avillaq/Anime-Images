@@ -4,12 +4,12 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), nullable=False)
+    username = db.Column(db.String(50), nullable=False)
     hashed_password = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     last_login = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
-    __table_args__ = (db.UniqueConstraint("username", name="model_username_key"),)
+    __table_args__ = (db.UniqueConstraint("username", name="username"),)
 
     def __repr__(self):
         return f"<User {self.username}>"
