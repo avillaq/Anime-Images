@@ -79,7 +79,6 @@ WAIFU_IM_API_URL = "https://api.waifu.im/search"
 WAIFU_PICS_API_URL = "https://api.waifu.pics"
 def fetch_image(tag="waifu", type="sfw"):
     source_api = random.randint(0, 1)
-    
     try:
         if source_api == 0 and IMAGES_TAGS["waifu.im"][type].count(tag) == 0:
             source_api = 1
@@ -89,7 +88,6 @@ def fetch_image(tag="waifu", type="sfw"):
         if source_api == 0:
             params = {
                 "included_tags": [tag],
-                "height": "<=750",
                 "is_nsfw": type == "nsfw"
             }
             response = requests.get(WAIFU_IM_API_URL, params=params)
