@@ -53,6 +53,34 @@ def get_favorites():
         "favorites": "favorites"
     })
 
+@bp.route("/user/favorites", methods=["POST"])
+@limiter.limit("50/minute")
+@flask_praetorian.auth_required
+def add_favorite():
+    user = flask_praetorian.current_user()
+
+    user_id = user.id
+    image_url = request.get_json(force=True).get("image_url", None)
+    source_api = request.get_json(force=True).get("source_api", None)
+
+    new_favorite = Favorite(
+        user_id=user_id,
+        image_url=image_url,
+        source_api=source_api
+    )
+    try:
+        db.session.add(new_favorite)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        return jsonify({
+            "error": "Failed to add favorite"
+        }), 400
+
+    return jsonify({
+        "message": "Favorite added successfully"
+    }), 201
+
 @bp.route("/images/download", methods=["GET"])
 @limiter.limit("50/minute")
 def get_download():
