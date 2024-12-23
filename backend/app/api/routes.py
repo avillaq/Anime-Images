@@ -36,6 +36,7 @@ def register():
 
 
 @bp.route("/auth/login", methods=["POST"])
+@limiter.limit("10/minute")
 def login():
     username = request.get_json(force=True).get("username", None)
     password = request.get_json(force=True).get("password", None)
