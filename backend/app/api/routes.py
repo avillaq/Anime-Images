@@ -52,6 +52,15 @@ def login():
     }), 200
 
 
+@bp.route("/auth/refresh", methods=["POST"])
+def refresh():
+    old_token = guard.read_token_from_header()
+    new_token = guard.refresh_jwt_token(old_token)
+    return jsonify({
+        "access_token": new_token
+    }), 200
+
+
 @bp.route("/user/favorites", methods=["GET"])   
 @limiter.limit("5/minute")
 @flask_praetorian.auth_required
