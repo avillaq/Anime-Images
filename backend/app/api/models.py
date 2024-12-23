@@ -7,7 +7,6 @@ class User(db.Model):
     username = db.Column(db.String(50), nullable=False)
     hashed_password = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
-    last_login = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
     MAX_FAVORITES = 100
 
@@ -19,8 +18,7 @@ class User(db.Model):
     def format(self):
         return {
             "id": self.id,
-            "username": self.username,
-            "last_login": self.last_login
+            "username": self.username
         }
     
     @property
@@ -71,7 +69,6 @@ class Download_history(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(255), nullable=False)
     downloaded_at = db.Column(db.DateTime, server_default=db.func.now())
-    ip_address = db.Column(db.String(255), nullable=True)
 
     def __repr__(self):
         return f"<Download_history {self.user_id} {self.image_url}>"
@@ -82,5 +79,4 @@ class Download_history(db.Model):
             "user_id": self.user_id,
             "image_url": self.image_url,
             "downloaded_at": self.downloaded_at,
-            "ip_address": self.ip_address,
         }
