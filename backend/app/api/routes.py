@@ -95,6 +95,7 @@ def get_download():
     user_id = -1
     try:
         user = flask_praetorian.current_user()
+        # TODO: CURRENTLY NOT WORKING
         user_id = user.id
     except:
         # If the user is not authenticated, set the user_id to 6 (anonymous user)
@@ -112,6 +113,7 @@ def get_download():
     new_download = Download_history(
         user_id=user_id,
         image_url=image_url,
+        ip_address=request.remote_addr
     )
     try:
         db.session.add(new_download)
