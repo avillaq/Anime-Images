@@ -91,18 +91,18 @@ def add_favorite():
 
 @bp.route("/images/download", methods=["POST"])
 @limiter.limit("50/minute")
+@flask_praetorian.auth_accepted
 def get_download():
-    user_id = -1
     try:
         user = flask_praetorian.current_user()
-        # TODO: CURRENTLY NOT WORKING
         user_id = user.id
     except:
         # If the user is not authenticated, set the user_id to 6 (anonymous user)
         user_id = 6
 
     image_url = request.get_json(force=True).get("image_url", None)
-    source_api = request.get_json(force=True).get("source_api", None)
+    #source_api = request.get_json(force=True).get("source_api", None)
+
     try: 
         response = requests.get(image_url)
     except:
