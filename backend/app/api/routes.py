@@ -60,9 +60,12 @@ def get_favorites():
     user_id = user.id
 
     favorites = Favorite.query.filter_by(user_id=user_id).all()
-    return jsonify(
-        [favorite.format() for favorite in favorites]
-    ), 200
+    fav_count = len(favorites)
+
+    return jsonify({
+        "total" : fav_count,
+        "favorites" : [favorite.format() for favorite in favorites]
+    }), 200
 
 
 @bp.route("/user/favorites", methods=["POST"])
