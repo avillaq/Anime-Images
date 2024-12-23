@@ -1,7 +1,7 @@
 from app.api import bp
 from app.api.api_images import fetch_image, get_tags
 from app.api.models import User, Favorite, Download_history
-from app.extensions import db, limiter, guard
+from app.extensions import db, limiter, guard, cache
 import flask_praetorian
 from flask import jsonify, request, send_file
 import requests
@@ -164,8 +164,7 @@ def get_download():
     
     new_download = Download_history(
         user_id=user_id,
-        image_url=image_url,
-        ip_address=request.remote_addr
+        image_url=image_url
     )
     try:
         db.session.add(new_download)
@@ -202,6 +201,7 @@ def get_image():
 
 @bp.route("/images/tags", methods=["GET"])
 @limiter.limit("10/minute")
+@cache.cached(timeout=3600)
 def get_all_tags():
     tags = get_tags()
     return jsonify(tags), 200

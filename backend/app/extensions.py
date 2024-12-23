@@ -16,7 +16,7 @@ limiter = Limiter(
 
 # Configuration for caching
 cache = Cache(config = {
-    "DEBUG": True,
+    "DEBUG": False,
     "CACHE_TYPE": "SimpleCache",
     "CACHE_DEFAULT_TIMEOUT": 300
 })
