@@ -51,9 +51,13 @@ def login():
 @limiter.limit("5/minute")
 @flask_praetorian.auth_required
 def get_favorites():
-    return jsonify({
-        "favorites": "favorites"
-    })
+    user = flask_praetorian.current_user()
+    user_id = user.id
+
+    favorites = Favorite.query.filter_by(user_id=user_id).all()
+    return jsonify(
+        [favorite.format() for favorite in favorites]
+    ), 200
 
 @bp.route("/user/favorites", methods=["POST"])
 @limiter.limit("50/minute")

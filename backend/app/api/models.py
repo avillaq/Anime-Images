@@ -58,8 +58,6 @@ class Favorite(db.Model):
 
     def format(self):
         return {
-            "id": self.id,
-            "user_id": self.user_id,
             "image_url": self.image_url,
             "source_api": self.source_api,
         }
