@@ -74,7 +74,7 @@ def add_favorite():
     except:
         db.session.rollback()
         return jsonify({
-            "error": "Failed to add favorite"
+            "error": "Image already exists in favorites"
         }), 400
 
     return jsonify({
