@@ -41,7 +41,7 @@ def register():
 
 
 @bp.route("/auth/login", methods=["POST"])
-@limiter.limit("10/minute")
+@limiter.limit("5/minute")
 def login():
     username = request.get_json(force=True).get("username", None)
     password = request.get_json(force=True).get("password", None)
@@ -105,7 +105,7 @@ def add_favorite():
 
 
 @bp.route("/user/favorites", methods=["DELETE"])
-@limiter.limit("50/minute")
+@limiter.limit("20/minute")
 @flask_praetorian.auth_required
 def delete_favorite():
     user = flask_praetorian.current_user()
@@ -170,7 +170,7 @@ def get_download():
 
 
 @bp.route("/images/random", methods=["POST"])
-@limiter.limit("50/minute")
+@limiter.limit("30/minute")
 def get_image():
     type = request.get_json(force=True).get("type",None)
     tag = request.get_json(force=True).get("tag",None)
