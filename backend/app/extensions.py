@@ -10,24 +10,15 @@ db = SQLAlchemy()
 
 # Configurations for rate limiting
 limiter = Limiter(
-    get_remote_address,
-    default_limits=["200/day", "50/hour"],
+    key_func=get_remote_address
 )
 
 # Configuration for caching
-cache = Cache(config = {
-    "DEBUG": False,
-    "CACHE_TYPE": "SimpleCache",
-    "CACHE_DEFAULT_TIMEOUT": 300
-})
+cache = Cache()
 
 # Configuration for CORS
 cors = CORS()
 
 # Configuration for JWT
 blacklist = set()
-def is_blacklisted(jti):
-    return jti in blacklist
-guard = Praetorian(
-  is_blacklisted=is_blacklisted
-)
+guard = Praetorian()
