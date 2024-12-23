@@ -51,6 +51,8 @@ class Favorite(db.Model):
     source_api = db.Column(db.String(255), nullable=False)
     added_at = db.Column(db.DateTime, server_default=db.func.now())
 
+    __table_args__ = (db.UniqueConstraint("user_id", "image_url", name="user_id_image_url"),)
+
     def __repr__(self):
         return f"<Favorites {self.user_id} {self.image_url}>"
 
