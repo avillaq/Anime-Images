@@ -66,7 +66,7 @@ def get_favorites():
 
 
 @bp.route("/user/favorites", methods=["POST"])
-@limiter.limit("50/minute")
+@limiter.limit("20/minute")
 @flask_praetorian.auth_required
 def add_favorite():
     user = flask_praetorian.current_user()
@@ -127,7 +127,7 @@ def delete_favorite():
 
 
 @bp.route("/images/download", methods=["POST"])
-@limiter.limit("50/minute")
+@limiter.limit("30/minute")
 @flask_praetorian.auth_accepted
 def get_download():
     try:
@@ -140,12 +140,17 @@ def get_download():
     image_url = request.get_json(force=True).get("image_url", None)
     #source_api = request.get_json(force=True).get("source_api", None)
 
+    if "https://i.waifu.pics/" not in image_url and "https://cdn.waifu.im/" not in image_url:
+        return jsonify({
+            "error": "Invalid image URL"
+        }), 400
+
     try: 
         response = requests.get(image_url)
     except:
         return jsonify({
-            "error": "Image not found"
-        }), 404
+            "error": "Download failed"
+        }), 400
     
     new_download = Download_history(
         user_id=user_id,
@@ -163,9 +168,9 @@ def get_download():
 
     return send_file(
         BytesIO(response.content),
-        mimetype='image/jpeg',
+        mimetype="image/jpeg",
         as_attachment=True,
-        download_name='image.jpg'
+        download_name=f"{image_url.split('/')[-1]}"
     )
 
 
