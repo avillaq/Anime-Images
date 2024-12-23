@@ -78,15 +78,15 @@ def get_tags():
 WAIFU_IM_API_URL = "https://api.waifu.im/search"
 WAIFU_PICS_API_URL = "https://api.waifu.pics"
 def fetch_image(tag="waifu", type="sfw"):
-    api_source = random.randint(0, 1)
+    source_api = random.randint(0, 1)
     
     try:
-        if api_source == 0 and IMAGES_TAGS["waifu.im"][type].count(tag) == 0:
-            api_source = 1
-        elif api_source == 1 and IMAGES_TAGS["waifu.pics"][type].count(tag) == 0:
-            api_source = 0
+        if source_api == 0 and IMAGES_TAGS["waifu.im"][type].count(tag) == 0:
+            source_api = 1
+        elif source_api == 1 and IMAGES_TAGS["waifu.pics"][type].count(tag) == 0:
+            source_api = 0
 
-        if api_source == 0:
+        if source_api == 0:
             params = {
                 "included_tags": [tag],
                 "height": "<=750",
@@ -98,20 +98,20 @@ def fetch_image(tag="waifu", type="sfw"):
                 data = response.json()
                 return {
                     "image_url": data["images"][0]["url"],
-                    "source": WAIFU_IM_API_URL
+                    "source_api": WAIFU_IM_API_URL
                 }
             return {
                 "error": "Failed to fetch image"
             }
 
-        elif api_source == 1:
+        elif source_api == 1:
             response = requests.get(f"{WAIFU_PICS_API_URL}/{type}/{tag}")
 
             if response.status_code == 200:
                 data = response.json()
                 return {
                     "image_url": data["url"],
-                    "source": WAIFU_PICS_API_URL
+                    "source_api": WAIFU_PICS_API_URL
                 }
             return {
                 "error": "Failed to fetch image"
