@@ -28,7 +28,7 @@ def register():
     try:
         db.session.add(new_user)
         db.session.commit()
-    except Exception:
+    except:
         db.session.rollback()
         return jsonify({
             "error": "Username already exists"
@@ -121,7 +121,7 @@ def add_favorite():
     try:
         db.session.add(new_favorite)
         db.session.commit()
-    except requests.RequestException:
+    except:
         db.session.rollback()
         return jsonify({
             "error": "Image already exists in favorites"
