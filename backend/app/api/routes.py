@@ -1,7 +1,7 @@
 from app.api import bp
 from app.api.api_images import fetch_image, get_tags
 from app.api.models import User, Favorite, Download_history
-from app.extensions import db, limiter, guard, cache
+from app.extensions import db, limiter, guard, cache, blacklist
 import flask_praetorian
 from flask import jsonify, request, send_file
 import requests

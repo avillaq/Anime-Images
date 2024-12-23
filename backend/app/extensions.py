@@ -25,4 +25,9 @@ cache = Cache(config = {
 cors = CORS()
 
 # Configuration for JWT
-guard = Praetorian()
+blacklist = set()
+def is_blacklisted(jti):
+    return jti in blacklist
+guard = Praetorian(
+  is_blacklisted=is_blacklisted
+)
