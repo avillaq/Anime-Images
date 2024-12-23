@@ -69,7 +69,7 @@ class Download_history(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(255), nullable=False)
     downloaded_at = db.Column(db.DateTime, server_default=db.func.now())
-    ip_address = db.Column(db.String(255), nullable=False)
+    ip_address = db.Column(db.String(255), nullable=True)
 
     def __repr__(self):
         return f"<Download_history {self.user_id} {self.image_url}>"

@@ -1,5 +1,7 @@
 from app.api import bp
-from flask import jsonify, request
+from flask import jsonify, request, send_file
+import requests
+from io import BytesIO
 from app.api.api_images import fetch_image, get_tags
 
 from app.api.models import User, Favorite, Download_history
@@ -87,10 +89,45 @@ def add_favorite():
         "message": "Image added to favorites"
     }), 201
 
-@bp.route("/images/download", methods=["GET"])
+@bp.route("/images/download", methods=["POST"])
 @limiter.limit("50/minute")
 def get_download():
-    return {"download": "download"}
+    user_id = -1
+    try:
+        user = flask_praetorian.current_user()
+        user_id = user.id
+    except:
+        # If the user is not authenticated, set the user_id to 6 (anonymous user)
+        user_id = 6
+
+    image_url = request.get_json(force=True).get("image_url", None)
+    source_api = request.get_json(force=True).get("source_api", None)
+    try: 
+        response = requests.get(image_url)
+    except:
+        return jsonify({
+            "error": "Image not found"
+        }), 404
+    
+    new_download = Download_history(
+        user_id=user_id,
+        image_url=image_url,
+    )
+    try:
+        db.session.add(new_download)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        return jsonify({
+            "error": "Unknown error"
+    }), 400
+
+    return send_file(
+        BytesIO(response.content),
+        mimetype='image/jpeg',
+        as_attachment=True,
+        download_name='image.jpg'
+    )
 
 @bp.route("/images/random", methods=["POST"])
 @limiter.limit("50/minute")
