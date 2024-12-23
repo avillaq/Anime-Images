@@ -3,7 +3,7 @@ from flask import jsonify, request
 from app.api.api_images import fetch_image, get_tags
 
 from app.api.models import User, Favorite, Download_history
-from app.extensions import db, limiter, cache, guard
+from app.extensions import db, limiter, guard
 import flask_praetorian
 
 @bp.route("/")
@@ -45,15 +45,20 @@ def login():
     }), 200
 
 @bp.route("/user/favorites", methods=["GET"])   
+@limiter.limit("5/minute")
 @flask_praetorian.auth_required
 def get_favorites():
-    return {"favorites": "favorites"}
+    return jsonify({
+        "favorites": "favorites"
+    })
 
 @bp.route("/images/download", methods=["GET"])
+@limiter.limit("50/minute")
 def get_download():
     return {"download": "download"}
 
 @bp.route("/images/random", methods=["POST"])
+@limiter.limit("50/minute")
 def get_image():
     type = request.get_json(force=True).get("type",None)
     tag = request.get_json(force=True).get("tag",None)
@@ -65,6 +70,14 @@ def get_image():
     return jsonify(image), 200
 
 @bp.route("/images/tags", methods=["GET"])
+@limiter.limit("10/minute")
 def search_image():
     tags = get_tags()
     return jsonify(tags), 200
+
+@bp.errorhandler(429)
+def ratelimit_error(e):
+    return jsonify({
+        "error" : "Rate limit exceeded",
+        "message": str(e.description)
+    }), 429
