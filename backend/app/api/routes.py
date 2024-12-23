@@ -56,7 +56,7 @@ def login():
 def logout():
     token = guard.read_token_from_header()
     data = guard.extract_jwt_token(token)
-    blacklist.add(data["jti"])
+    blacklist.add_token(token, data["exp"])
     return jsonify({
         "message": "Logged out successfully"
     }), 200

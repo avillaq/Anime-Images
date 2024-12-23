@@ -20,10 +20,7 @@ def create_app():
                 supports_credentials=False,
         )
 
-    def is_blacklisted(jti):
-        return jti in blacklist
-
-    guard.init_app(app, User,is_blacklisted=is_blacklisted)
+    guard.init_app(app, User,is_blacklisted=blacklist.is_blacklisted)
 
     # Register blueprints
     from app.api import bp as api_bp
