@@ -71,6 +71,13 @@ def get_favorites():
 def add_favorite():
     user = flask_praetorian.current_user()
 
+    fav_count = Favorite.query.filter_by(user_id=user.id).count()
+    
+    if fav_count >= User.MAX_FAVORITES:
+        return jsonify({
+            "error": "Favorites limit reached"
+        }), 400
+
     user_id = user.id
     source_api = request.get_json(force=True).get("source_api", None)
     image_url = request.get_json(force=True).get("image_url", None)

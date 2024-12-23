@@ -9,6 +9,8 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     last_login = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
+    MAX_FAVORITES = 100
+
     __table_args__ = (db.UniqueConstraint("username", name="username"),)
 
     def __repr__(self):
