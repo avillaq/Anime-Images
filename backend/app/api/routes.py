@@ -31,7 +31,8 @@ def register():
         }), 400
 
     return jsonify({
-        "access_token": guard.encode_jwt_token(new_user)
+        "access_token": guard.encode_jwt_token(new_user),
+        "message": "User created successfully"
     }), 201
 
 
@@ -42,7 +43,8 @@ def login():
     password = request.get_json(force=True).get("password", None)
     user = guard.authenticate(username, password)
     return jsonify({
-        "access_token": guard.encode_jwt_token(user)
+        "access_token": guard.encode_jwt_token(user),
+        "message": "Login successful"
     }), 200
 
 @bp.route("/user/favorites", methods=["GET"])   
@@ -78,7 +80,7 @@ def add_favorite():
         }), 400
 
     return jsonify({
-        "message": "Favorite added successfully"
+        "message": "Image added to favorites"
     }), 201
 
 @bp.route("/images/download", methods=["GET"])
@@ -100,13 +102,12 @@ def get_image():
 
 @bp.route("/images/tags", methods=["GET"])
 @limiter.limit("10/minute")
-def search_image():
+def getAll_Tags():
     tags = get_tags()
     return jsonify(tags), 200
 
 @bp.errorhandler(429)
 def ratelimit_error(e):
     return jsonify({
-        "error" : "Rate limit exceeded",
-        "message": str(e.description)
+        "error" : "Rate limit exceeded"
     }), 429
