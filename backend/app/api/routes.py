@@ -1,18 +1,19 @@
 from app.api import bp
-from flask import jsonify, request, send_file
-import requests
-from io import BytesIO
 from app.api.api_images import fetch_image, get_tags
-
 from app.api.models import User, Favorite, Download_history
 from app.extensions import db, limiter, guard
 import flask_praetorian
+from flask import jsonify, request, send_file
+import requests
+from io import BytesIO
+
 
 @bp.route("/")
 def home():
     return jsonify({
         "message": "Welcome to the Anime Images API"
     }), 200
+
 
 @bp.route("/auth/register", methods=["POST"])
 def register():
@@ -26,7 +27,7 @@ def register():
     try:
         db.session.add(new_user)
         db.session.commit()
-    except:
+    except Exception:
         db.session.rollback()
         return jsonify({
             "error": "Username already exists"
@@ -49,6 +50,7 @@ def login():
         "message": "Login successful"
     }), 200
 
+
 @bp.route("/user/favorites", methods=["GET"])   
 @limiter.limit("5/minute")
 @flask_praetorian.auth_required
@@ -60,6 +62,7 @@ def get_favorites():
     return jsonify(
         [favorite.format() for favorite in favorites]
     ), 200
+
 
 @bp.route("/user/favorites", methods=["POST"])
 @limiter.limit("50/minute")
@@ -79,7 +82,7 @@ def add_favorite():
     try:
         db.session.add(new_favorite)
         db.session.commit()
-    except:
+    except requests.RequestException:
         db.session.rollback()
         return jsonify({
             "error": "Image already exists in favorites"
@@ -88,6 +91,7 @@ def add_favorite():
     return jsonify({
         "message": "Image added to favorites"
     }), 201
+
 
 @bp.route("/images/download", methods=["POST"])
 @limiter.limit("50/minute")
@@ -131,6 +135,7 @@ def get_download():
         download_name='image.jpg'
     )
 
+
 @bp.route("/images/random", methods=["POST"])
 @limiter.limit("50/minute")
 def get_image():
@@ -143,11 +148,13 @@ def get_image():
 
     return jsonify(image), 200
 
+
 @bp.route("/images/tags", methods=["GET"])
 @limiter.limit("10/minute")
-def getAll_Tags():
+def get_all_tags():
     tags = get_tags()
     return jsonify(tags), 200
+
 
 @bp.errorhandler(429)
 def ratelimit_error(e):
