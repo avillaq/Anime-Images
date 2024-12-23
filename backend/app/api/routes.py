@@ -72,8 +72,18 @@ def add_favorite():
     user = flask_praetorian.current_user()
 
     user_id = user.id
-    image_url = request.get_json(force=True).get("image_url", None)
     source_api = request.get_json(force=True).get("source_api", None)
+    image_url = request.get_json(force=True).get("image_url", None)
+
+    if "waifu.im" not in source_api and "waifu.pics" not in source_api:
+        return jsonify({
+            "error": "Invalid source API"
+        }), 400
+    
+    if "https://i.waifu.pics/" not in image_url and "https://cdn.waifu.im/" not in image_url:
+        return jsonify({
+            "error": "Invalid image URL"
+        }), 400
 
     new_favorite = Favorite(
         user_id=user_id,
@@ -92,6 +102,28 @@ def add_favorite():
     return jsonify({
         "message": "Image added to favorites"
     }), 201
+
+
+@bp.route("/user/favorites", methods=["DELETE"])
+@limiter.limit("50/minute")
+@flask_praetorian.auth_required
+def delete_favorite():
+    user = flask_praetorian.current_user()
+    user_id = user.id
+    image_url = request.get_json(force=True).get("image_url", None)
+
+    favorite = Favorite.query.filter_by(user_id=user_id, image_url=image_url).first()
+    if not favorite:
+        return jsonify({
+            "error": "Image not found in favorites"
+        }), 404
+
+    db.session.delete(favorite)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Image removed from favorites"
+    }), 200
 
 
 @bp.route("/images/download", methods=["POST"])
