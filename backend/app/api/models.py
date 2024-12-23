@@ -3,7 +3,7 @@ from app.extensions import db
 class User(db.Model):
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False)
     hashed_password = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
@@ -45,7 +45,7 @@ class User(db.Model):
 class Favorite(db.Model):
     __tablename__ = "favorites"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(255), nullable=False)
     source_api = db.Column(db.String(255), nullable=False)
@@ -67,7 +67,7 @@ class Favorite(db.Model):
 class Download_history(db.Model):
     __tablename__ = "download_history"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(255), nullable=False)
     downloaded_at = db.Column(db.DateTime, server_default=db.func.now())
