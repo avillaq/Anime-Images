@@ -144,7 +144,7 @@ def get_download():
         user = flask_praetorian.current_user()
         user_id = user.id
     except:
-        # If the user is not authenticated, set the user_id to 6 (anonymous user)
+        # If the user is not authenticated, set the user_id to anonymous user id
         user_id = 6
 
     image_url = request.get_json(force=True).get("image_url", None)
@@ -176,11 +176,14 @@ def get_download():
             "error": "Unknown error"
     }), 400
 
+    filename = image_url.split("/")[-1]
+    content_type = response.headers.get("Content-Type", "image/jpeg")
+
     return send_file(
         BytesIO(response.content),
-        mimetype="image/jpeg",
+        mimetype=content_type,
         as_attachment=True,
-        download_name=f"{image_url.split('/')[-1]}"
+        download_name=filename
     )
 
 
