@@ -8,7 +8,7 @@ class User(db.Model):
     hashed_password = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    MAX_FAVORITES = 100
+    MAX_FAVORITES = 50
 
     __table_args__ = (db.UniqueConstraint("username", name="username"),)
 
