@@ -51,6 +51,15 @@ def login():
         "message": "Login successful"
     }), 200
 
+@bp.route("/auth/logout", methods=["POST"])
+@flask_praetorian.auth_required
+def logout():
+    token = guard.read_token_from_header()
+    data = guard.extract_jwt_token(token)
+    blacklist.add(data["jti"])
+    return jsonify({
+        "message": "Logged out successfully"
+    }), 200
 
 @bp.route("/auth/refresh", methods=["POST"])
 def refresh():
