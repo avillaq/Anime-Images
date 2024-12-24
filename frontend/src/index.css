@@ -17,7 +17,9 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  color: #000;
+  color: #fff;
+  background-color: #080411;
+  min-height: 100vh;
 }
 
 p, h1, h2{
