@@ -1,7 +1,7 @@
 import { RouterProvider } from './routes/RouterProvider'
 
 function App() {
-  return <RouterProvider></RouterProvider>
+  return <RouterProvider/>
 }
 
 export default App
