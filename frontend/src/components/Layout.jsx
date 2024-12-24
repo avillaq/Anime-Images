@@ -1,16 +1,17 @@
-
+import { Outlet } from "react-router-dom";
+import { NavBar } from "./NavBar";
+import "../styles/Layout.css";
 export const Layout = () => {
   return (
-    <div>
-      <header>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-          </ul>
-        </nav>
+    <>
+      <header className="header-container">
+        <NavBar />
+        <div className="navbar-line"></div>
       </header>
-
-    </div>
+      <main className='main-container'>
+          <Outlet />
+        <div className='main-gradient'></div>
+      </main>
+    </>
   )
 }
