@@ -20,7 +20,7 @@ body {
   color: #fff;
   background-color: #080411;
   min-height: 100vh;
-  overflow: clip;
+  overflow-x: hidden;
 }
 
 p, h1, h2{
