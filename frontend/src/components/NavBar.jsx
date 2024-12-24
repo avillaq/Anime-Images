@@ -50,27 +50,29 @@ export function NavBar() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link className="text-inherit" href="/">
             Sfw Images
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="#">
+        <NavbarItem>
+          <Link className="text-inherit" href="/">
             Nsfw Images
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
+          <Link color="danger" href="/">
+            Favorites
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+        <NavbarItem>
+          <Button as={Link} className="text-inherit" color="secondary" href="/" variant="light">
+            Login
+          </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} className="text-inherit" color="secondary" href="/" variant="ghost">
             Sign Up
           </Button>
         </NavbarItem>
@@ -83,7 +85,7 @@ export function NavBar() {
               color={
                 index === menuItems.length - 1 ? "danger" : "foreground"
               }
-              href="#"
+              href="/"
               size="lg"
             >
               {item}
