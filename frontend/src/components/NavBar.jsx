@@ -44,12 +44,12 @@ export const NavBar = () => {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link className="text-inherit hover:text-secondary-200 transition-colors" href="/">
+          <Link className="text-inherit hover:text-secondary-300 transition-colors" href="/">
             Sfw Images
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className="text-inherit hover:text-danger-200 transition-colors" href="/">
+          <Link className="text-inherit hover:text-danger-300 transition-colors" href="/">
             Nsfw Images
           </Link>
         </NavbarItem>
