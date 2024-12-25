@@ -5,7 +5,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|navbar|image).js",
+    "./node_modules/@nextui-org/theme/dist/components/(button|navbar|image|link).js",
   ],
   theme: {
     extend: {},

@@ -21,6 +21,7 @@ export const Home = () => {
         <Image
           alt="Anime Image"
           src={WelcomeImage}
+          draggable={false}
         />
       </figure>
     </section>

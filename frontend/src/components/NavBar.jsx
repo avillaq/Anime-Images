@@ -36,6 +36,7 @@ export const NavBar = () => {
             alt="Anime Logo"
             src={LogoImage}
             width={48}
+            draggable={false}
           />
           <p className="font-bold text-inherit">Anime Images</p>
         </NavbarBrand>
@@ -48,22 +49,22 @@ export const NavBar = () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className="text-inherit hover:text-secondary-200 transition-colors" href="/">
+          <Link className="text-inherit hover:text-danger-200 transition-colors" href="/">
             Nsfw Images
           </Link>
         </NavbarItem>
-        <NavbarItem>
+{/*         <NavbarItem>
           <Link className="hover:text-danger-600 transition-colors" color="danger" href="/">
             Favorites
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify="end">
-{/*         <NavbarItem>
+        <NavbarItem>
           <Button as={Link} className="text-inherit" color="secondary" href="/" variant="light">
             Login
           </Button>
-        </NavbarItem> */}
+        </NavbarItem>
         <NavbarItem>
           <Button as={Link} className="text-inherit" color="secondary" href="/" variant="ghost">
             Sign Up
