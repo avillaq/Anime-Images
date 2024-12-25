@@ -2,6 +2,7 @@ import "../styles/Home.css";
 import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
 import WelcomeImage from "../assets/anime-maid.webp";
+import { Link } from "@nextui-org/link";
 
 export const Home = () => {
   return (
@@ -12,8 +13,8 @@ export const Home = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque suscipit dicta assumenda iste doloribus ullam sit tempora ut excepturi placeat? Officiis qui ducimus debitis. Quisquam sed porro facilis possimus quis!
         </p>
         <div className="home-button-container">
-          <Button color="secondary">Get anime 1 Image</Button>
-          <Button color="danger">Get Anime 2 Image</Button>
+          <Button as={Link} color="secondary">Get anime SFW Image</Button>
+          <Button as={Link} color="danger">Get Anime NSFW Image</Button>
         </div>
       </div>
       <figure className="home-image-container">
