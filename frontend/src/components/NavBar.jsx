@@ -50,17 +50,17 @@ export function NavBar() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link className="text-inherit" href="/">
+          <Link className="text-inherit hover:text-secondary-200 transition-colors" href="/">
             Sfw Images
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className="text-inherit" href="/">
+          <Link className="text-inherit hover:text-secondary-200 transition-colors" href="/">
             Nsfw Images
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="danger" href="/">
+          <Link className="hover:text-danger-600 transition-colors" color="danger" href="/">
             Favorites
           </Link>
         </NavbarItem>
