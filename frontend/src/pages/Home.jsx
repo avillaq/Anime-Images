@@ -13,8 +13,8 @@ export const Home = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque suscipit dicta assumenda iste doloribus ullam sit tempora ut excepturi placeat? Officiis qui ducimus debitis. Quisquam sed porro facilis possimus quis!
         </p>
         <div className="home-button-container">
-          <Button as={Link} color="secondary">Get anime SFW Image</Button>
-          <Button as={Link} color="danger">Get Anime NSFW Image</Button>
+          <Button as={Link} href="/image/sfw" color="secondary">Get anime SFW Image</Button>
+          <Button as={Link} href="/image/nsfw" color="danger">Get Anime NSFW Image</Button>
         </div>
       </div>
       <figure className="home-image-container">
