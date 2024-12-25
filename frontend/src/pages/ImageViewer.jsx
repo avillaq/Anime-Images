@@ -34,12 +34,13 @@ export const ImageViewer = ({ type }) => {
             className="max-w-xs text-inherit"
             label="Select a category"
             onChange={(e) => SetCategory(e.target.value)}
+            showScrollIndicators={{isEnable: true}}
           >
             {animals.map((animal) => (
               <SelectItem key={animal.key} className="text-inherit">{animal.label}</SelectItem>
             ))}
           </Select>
-          <Button className="max-w-6" isDisabled={!category} onPress={() => alert("Not implemented yet")} color={type === "sfw" ? "secondary" : "danger"}>
+          <Button className="min-w-8" isDisabled={!category} onPress={() => alert("Not implemented yet")} color={type === "sfw" ? "secondary" : "danger"}>
             Get Image
           </Button>
         </div>

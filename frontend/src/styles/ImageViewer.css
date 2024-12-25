@@ -22,6 +22,15 @@
   margin-bottom: 24px;
 }
 
+div[data-slot^="popover"] {
+  backdrop-filter: blur(24px);
+  background-color: rgba(8, 4, 17, .2);
+}
+
+div[data-slot^="listboxWrapper"] {
+  scrollbar-width: none;
+}
+
 .image-viewer-image-container {
   display: flex;
   justify-content: center;
