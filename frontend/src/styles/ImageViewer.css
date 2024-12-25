@@ -6,10 +6,9 @@
 }
 
 .image-viewer-content-container h1 {
-  font-size: 48px;
+  font-size: 36px;
   line-height: normal;
   font-weight: 700;
-  width: 80%;
   margin-bottom: 24px;
 }
 
@@ -50,5 +49,8 @@ div[data-slot^="listboxWrapper"] {
   .image-viewer-container {
     padding: 6rem 0;
     flex-direction: row;
+  }
+  .image-viewer-content-container {
+    width: 30%;
   }
 }
