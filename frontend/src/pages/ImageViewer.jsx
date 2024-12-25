@@ -34,19 +34,18 @@ export const ImageViewer = ({ type }) => {
             className="max-w-xs text-inherit"
             label="Select a category"
             onChange={(e) => SetCategory(e.target.value)}
-            showScrollIndicators={{isEnable: true}}
             items={animals}
           >
             {(animal) => <SelectItem>{animal.label}</SelectItem>}
           </Select>
-          <Button className="min-w-8" isDisabled={!category} onPress={() => alert("Not implemented yet")} color={type === "sfw" ? "secondary" : "danger"}>
+          <Button className="min-w-8" isDisabled={!category} onPress={() => console.log(`${category}`)} color={type === "sfw" ? "secondary" : "danger"}>
             Get Image
           </Button>
         </div>
       </div>
       <figure className="image-viewer-image-container">
         <Image
-          alt="Anime Image"
+          alt="Anime Image Placeholder"
           src={WelcomeImage}
           draggable={false}
         />
