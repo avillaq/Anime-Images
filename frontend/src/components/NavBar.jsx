@@ -59,11 +59,11 @@ export const NavBar = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
+{/*         <NavbarItem>
           <Button as={Link} className="text-inherit" color="secondary" href="/" variant="light">
             Login
           </Button>
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem>
           <Button as={Link} className="text-inherit" color="secondary" href="/" variant="ghost">
             Sign Up
