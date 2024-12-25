@@ -1,5 +1,7 @@
 import "../styles/Home.css";
 import {Button} from "@nextui-org/button";
+import {Image} from "@nextui-org/image";
+import WelcomeImage from "../assets/anime-maid.webp";
 
 export const Home = () => {
   return (
@@ -16,7 +18,10 @@ export const Home = () => {
           <Button color="danger">Get nsfw Image</Button>
         </div>
         <div className="home-image-container">
-          <img src="" alt="Anime image" />
+        <Image
+          alt="Anime Image"
+          src={WelcomeImage}
+        />
         </div>
 
       </main>
