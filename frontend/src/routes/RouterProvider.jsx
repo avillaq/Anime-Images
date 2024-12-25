@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useNavigate, useHref } from 'react-router-dom';
 import { NextUIProvider } from "@nextui-org/system";
-import { routes } from './Routes';
+import { routes } from './routes';
 import { Layout } from '../components/Layout';
 
 

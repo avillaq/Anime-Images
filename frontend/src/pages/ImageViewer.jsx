@@ -1,6 +1,10 @@
 import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
+import { Image } from "@nextui-org/image";
+import WelcomeImage from "../assets/anime-maid.webp";
+import "../styles/ImageViewer.css";
+
 export const animals = [
   { key: "cat", label: "Cat" },
   { key: "dog", label: "Dog" },
@@ -18,28 +22,27 @@ export const animals = [
 ];
 
 export const ImageViewer = ({ type }) => {
-  const [category, SetCategory] = useState("cat");
+  const [category, SetCategory] = useState();
 
   return (
     <section className="image-viewer-container">
-      <h1>Random {type.toUpperCase()} Anime Image</h1>
       <div className="image-viewer-content-container">
-        <Select
-          variant="bordered"
-          isRequired
-          className="max-w-xs"
-          color={type === "sfw" ? "secondary" : "danger"}
-          label={`${type.toUpperCase()} image`}
-          placeholder="Select a category"
-          onChange={(e) => SetCategory(e.target.value)}
-        >
-          {animals.map((animal) => (
-            <SelectItem key={animal.key}>{animal.label}</SelectItem>
-          ))}
-        </Select>
-        <Button disabled={category ? false : true} onPress={() => alert("Not implemented yet")} color={type === "sfw" ? "secondary" : "danger"}>
-          Get Image
-        </Button>
+        <h1>Random {type.toUpperCase()} Anime Image</h1>
+        <div className="image-viewer-select-container">
+          <Select
+            variant="flat"
+            className="max-w-xs text-inherit"
+            label="Select a category"
+            onChange={(e) => SetCategory(e.target.value)}
+          >
+            {animals.map((animal) => (
+              <SelectItem key={animal.key} className="text-inherit">{animal.label}</SelectItem>
+            ))}
+          </Select>
+          <Button className="max-w-6" isDisabled={!category} onPress={() => alert("Not implemented yet")} color={type === "sfw" ? "secondary" : "danger"}>
+            Get Image
+          </Button>
+        </div>
       </div>
       <figure className="image-viewer-image-container">
         <Image
