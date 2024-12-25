@@ -11,6 +11,8 @@
 }
 html {
   box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 body {
   /*font-family: var(--font-family);*/

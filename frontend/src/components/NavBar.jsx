@@ -36,7 +36,7 @@ export function NavBar() {
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="navbar-container">
+    <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} className="navbar-container">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -77,14 +77,11 @@ export function NavBar() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className="navbar-menu">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
-              className="w-full"
-              color={
-                index === menuItems.length - 1 ? "danger" : "foreground"
-              }
+              className="w-full text-inherit"
               href="/"
               size="lg"
             >

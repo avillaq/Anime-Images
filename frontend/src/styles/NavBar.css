@@ -2,3 +2,8 @@
   backdrop-filter: inherit;
   background-color: inherit;
 }
+
+.navbar-menu {
+  backdrop-filter: blur(24px);
+  background-color: rgba(8, 4, 17, .2);
+}
