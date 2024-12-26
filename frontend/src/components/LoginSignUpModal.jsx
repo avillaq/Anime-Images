@@ -2,15 +2,14 @@ import {
   Modal,
   ModalContent,
   ModalHeader,
-  ModalBody,
-  ModalFooter,
+  ModalBody
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Form } from "@nextui-org/form";
 import { useState } from "react";
 
-export const LoginModal = ({ isOpen, onOpenChange }) => {
+export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -77,7 +76,7 @@ export const LoginModal = ({ isOpen, onOpenChange }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">{mode === "login" ? "Log in" : "Sign Up"}</ModalHeader>
               <ModalBody>
                 <Form className="w-full" validationBehavior="native" onSubmit={onSubmit} validationErrors={errors}>
                   <Input

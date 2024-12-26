@@ -12,13 +12,14 @@ import { useDisclosure } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { Image } from "@nextui-org/image";
-import { LoginModal } from "./LoginModal";
+import { LoginSignUpModal } from "./LoginSignUpModal";
 import "../styles/NavBar.css";
 import LogoImage from "../assets/anime-girl-logo.svg";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const LoginModalController = useDisclosure();
+  const RegisterModalController = useDisclosure();
 
   const menuItems = [
     "Sfw Images",
@@ -64,16 +65,16 @@ export const NavBar = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button className="text-inherit" color="secondary" variant="light" onPress={onOpen}>
+          <Button className="text-inherit" color="secondary" variant="light" onPress={LoginModalController.onOpen}>
             Login
           </Button>
-          <LoginModal isOpen={isOpen} onOpenChange={onOpenChange}/>
+          <LoginSignUpModal isOpen={LoginModalController.isOpen} onOpenChange={LoginModalController.onOpenChange}/>
         </NavbarItem>
         <NavbarItem>
-          <Button className="text-inherit" color="secondary" variant="ghost" onPress={onOpen}>
+          <Button className="text-inherit" color="secondary" variant="ghost" onPress={RegisterModalController.onOpen}>
             Sign Up
           </Button>
-          <LoginModal isOpen={isOpen} onOpenChange={onOpenChange}/>
+          <LoginSignUpModal isOpen={RegisterModalController.isOpen} onOpenChange={RegisterModalController.onOpenChange}/>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className="navbar-menu">
