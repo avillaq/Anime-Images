@@ -8,14 +8,17 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
+import { useDisclosure } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
-import {Image} from "@nextui-org/image";
+import { Image } from "@nextui-org/image";
+import { LoginModal } from "./LoginModal";
 import "../styles/NavBar.css";
 import LogoImage from "../assets/anime-girl-logo.svg";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const menuItems = [
     "Sfw Images",
@@ -61,14 +64,16 @@ export const NavBar = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} className="text-inherit" color="secondary" href="/" variant="light">
+          <Button className="text-inherit" color="secondary" variant="light" onPress={onOpen}>
             Login
           </Button>
+          <LoginModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} />
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} className="text-inherit" color="secondary" href="/" variant="ghost">
+          <Button className="text-inherit" color="secondary" variant="ghost" onPress={onOpen}>
             Sign Up
           </Button>
+          <LoginModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange}/>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className="navbar-menu">
