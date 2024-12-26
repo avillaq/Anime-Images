@@ -22,8 +22,7 @@
 }
 
 div[data-slot^="content"] {
-  background-color: #080411;
-  border: 1px solid #52525b;
+  background-color: #19172c;
 }
 
 span[data-slot^="value"] {
