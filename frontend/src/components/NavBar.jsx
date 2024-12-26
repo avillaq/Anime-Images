@@ -54,7 +54,7 @@ export const NavBar = () => {
           </Link>
         </NavbarItem>
 {/*         <NavbarItem>
-          <Link className="hover:text-danger-600 transition-colors" color="danger" href="/">
+          <Link className="hover:text-danger-600 transition-colors" color="danger" href="/user/favorites">
             Favorites
           </Link>
         </NavbarItem> */}
