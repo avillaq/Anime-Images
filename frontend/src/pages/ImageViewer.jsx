@@ -31,7 +31,7 @@ export const ImageViewer = ({ type }) => {
         <div className="image-viewer-select-container">
           <Select
             variant="flat"
-            className="max-w-xs text-inherit"
+            className="max-w-xs"
             label="Select a category"
             onChange={(e) => SetCategory(e.target.value)}
             items={animals}

@@ -53,7 +53,7 @@ export const LockIcon = (props) => {
   );
 };
 
-export const LoginModal = ({ isOpen, onOpen, onOpenChange }) => {
+export const LoginModal = ({ isOpen, onOpenChange }) => {
 
   return (
     <>
