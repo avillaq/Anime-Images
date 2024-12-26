@@ -19,9 +19,9 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
   const validate = (value, field) => {
     if (!value || value.trim() === "") {
       return `${field} is required`;
-    } else if (value.length < 3) {
+    } else if (value.length < 3 && mode !== "login") {
       return `${field} must be at least 3 characters long`;
-    } else if (value.length > 8) {
+    } else if (value.length > 8 && mode !== "login") {
       return `${field} must be at most 8 characters long`;
     }
     return value === "admin" ? "Nice try!" : null;
