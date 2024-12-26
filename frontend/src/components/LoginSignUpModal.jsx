@@ -84,7 +84,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
                     isDisabled={isLoading}
                     label="Username"
                     name="username"
-                    placeholder="Enter your username"
+                    placeholder={`Enter ${mode === "login" ? "your" : "an"} username`}
                     variant="bordered"
                     value={username}
                     onValueChange={setUsername}
@@ -94,7 +94,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
                     isDisabled={isLoading}
                     label="Password"
                     name="password"
-                    placeholder="Enter your password"
+                    placeholder={`Enter ${mode === "login" ? "your" : "a"} password`}
                     variant="bordered"
                     value={password}
                     onValueChange={setPassword}
@@ -104,7 +104,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
                       Close
                     </Button>
                     <Button color="secondary" isLoading={isLoading} type="submit">
-                      Sign in
+                    {mode === "login" ? "Sign in" : "Sign Up"}
                     </Button>
                   </div>
                 </Form>

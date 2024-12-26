@@ -68,13 +68,13 @@ export const NavBar = () => {
           <Button className="text-inherit" color="secondary" variant="light" onPress={LoginModalController.onOpen}>
             Login
           </Button>
-          <LoginSignUpModal isOpen={LoginModalController.isOpen} onOpenChange={LoginModalController.onOpenChange}/>
+          <LoginSignUpModal mode={"login"} isOpen={LoginModalController.isOpen} onOpenChange={LoginModalController.onOpenChange}/>
         </NavbarItem>
         <NavbarItem>
           <Button className="text-inherit" color="secondary" variant="ghost" onPress={RegisterModalController.onOpen}>
             Sign Up
           </Button>
-          <LoginSignUpModal isOpen={RegisterModalController.isOpen} onOpenChange={RegisterModalController.onOpenChange}/>
+          <LoginSignUpModal mode={"signUp"} isOpen={RegisterModalController.isOpen} onOpenChange={RegisterModalController.onOpenChange}/>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className="navbar-menu">
