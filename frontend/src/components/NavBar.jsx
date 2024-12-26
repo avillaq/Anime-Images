@@ -67,7 +67,7 @@ export const NavBar = () => {
           <Button className="text-inherit" color="secondary" variant="light" onPress={onOpen}>
             Login
           </Button>
-          <LoginModal isOpen={isOpen} onOpenChange={onOpenChange} />
+          <LoginModal isOpen={isOpen} onOpenChange={onOpenChange}/>
         </NavbarItem>
         <NavbarItem>
           <Button className="text-inherit" color="secondary" variant="ghost" onPress={onOpen}>

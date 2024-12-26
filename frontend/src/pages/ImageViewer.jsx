@@ -30,7 +30,8 @@ export const ImageViewer = ({ type }) => {
         <h1>Random {type.toUpperCase()} Anime Image</h1>
         <div className="image-viewer-select-container">
           <Select
-            variant="flat"
+            variant="bordered"
+            color={type === "sfw" ? "secondary" : "danger" }
             className="max-w-xs"
             label="Select a category"
             onChange={(e) => SetCategory(e.target.value)}
