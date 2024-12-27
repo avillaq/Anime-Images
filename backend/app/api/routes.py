@@ -31,7 +31,7 @@ def register():
     except:
         db.session.rollback()
         return jsonify({
-            "error": "Username already exists"
+            "error": "Sorry, this username is taken"
         }), 400
 
     return jsonify({
@@ -45,7 +45,13 @@ def register():
 def login():
     username = request.get_json(force=True).get("username", None)
     password = request.get_json(force=True).get("password", None)
-    user = guard.authenticate(username, password)
+    try:
+        user = guard.authenticate(username, password)
+    except:
+        return jsonify({
+            "error": "Username or password is incorrect"
+        }), 400
+    
     return jsonify({
         "access_token": guard.encode_jwt_token(user),
         "message": "Login successful"
