@@ -9,7 +9,7 @@ import { Input } from "@nextui-org/input";
 import { Form } from "@nextui-org/form";
 import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
-import { login } from "../service/apiService";
+import { login, signUp } from "../service/apiService";
 
 export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
   const { setAccessToken } = useAuthStore();
@@ -54,7 +54,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
       setAccessToken(result.access_token);
 
       // TODO: Show a toast message: resut.message
-      
+
       resetStates();
     }
 
@@ -123,6 +123,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
                     isDisabled={isLoading}
                     label="Password"
                     name="password"
+                    type="password"
                     placeholder={`Enter ${mode === "login" ? "your" : "a"} password`}
                     variant="bordered"
                     value={password}
@@ -151,26 +152,4 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
       </Modal>
     </>
   );
-}
-/*
-// Fake server used in this example.
-async function login(_) {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
-  return {
-    p: {
-      username: "Sorry, username or password is incorrect.",
-      password: "Sorry, username or password is incorrect.",
-    },
-  };
-}
-*/
-async function signUp(_) {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
-  return {
-    errors: {
-      username: "Sorry, this username is taken.",
-    },
-  };
 }
