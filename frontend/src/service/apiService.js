@@ -1,21 +1,21 @@
-import axiosInstance from "./axiosInstance";
+import { axiosInstance } from "./axiosInstance";
 import { API_CONFIG } from "../config/api.config";
 
-export const login = async (username, password) => {
+export const login = async ({ username, password }) => {
   try {
     const response = await axiosInstance.post(API_CONFIG.endpoints.auth.login, { username, password });
     return response.data;
   } catch (error) {
-    return { error: error.response.data };
+    return error.response.data;
   }
 };
 
-export const register = async (username, password) => {
+export const register = async ({ username, password }) => {
   try {
     const response = await axiosInstance.post(API_CONFIG.endpoints.auth.register, { username, password });
     return response.data;
   } catch (error) {
-    return { error: error.response.data };
+    return error.response.data;
   }
 };
 
@@ -24,7 +24,7 @@ export const fetchRandomImage = async (type, tag) => {
     const response = await axiosInstance.post(API_CONFIG.endpoints.images.getRandom, { type, tag });
     return response.data;
   } catch (error) {
-    return { error: error.response.data };
+    return error.response.data;
   }
 };
 
@@ -33,7 +33,7 @@ export const fetchTags = async () => {
     const response = await axiosInstance.get(API_CONFIG.endpoints.images.tags);
     return response.data;
   } catch (error) {
-    return { error: error.response.data };
+    return error.response.data;
   }
 };
 
