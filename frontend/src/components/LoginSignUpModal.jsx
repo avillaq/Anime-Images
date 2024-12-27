@@ -27,14 +27,30 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
     return value === "admin" ? "Nice try!" : null;
   }
 
+  const resetStates = () => {
+    setUsername("");
+    setPassword("");
+    setErrors({});
+    setIsLoading(false);
+    onOpenChange();
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = Object.fromEntries(new FormData(e.currentTarget));
 
-    console.log(data);
-
-    const result = await callServer(data);
+    let result = {};
+    if (mode === "login") {
+      result = await login(data);
+    } else {
+      result = await signUp(data);
+    }
+    
+    if (!result.errors) {
+      // TODO: Logic to save the user token in the local storage.
+      resetStates();
+    }
 
     setErrors(result.errors);
     setIsLoading(false);
@@ -43,7 +59,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}
+      <Modal isOpen={isOpen} placement="top-center" onOpenChange={resetStates}
         backdrop="opaque"
         classNames={{
           body: "py-6",
@@ -100,7 +116,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
                     onValueChange={setPassword}
                   />
                   <div className="flex gap-3 mt-6 justify-end w-full">
-                    <Button color="danger" variant="light" onPress={onClose}>
+                    <Button color="danger" variant="light" isDisabled={isLoading} onPress={onClose}>
                       Close
                     </Button>
                     <Button color="secondary" isLoading={isLoading} type="submit">
@@ -118,13 +134,23 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
 }
 
 // Fake server used in this example.
-async function callServer(_) {
-  await new Promise((resolve) => setTimeout(resolve, 500));
+async function login(_) {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  return {
+    p: {
+      username: "Sorry, username or password is incorrect.",
+      password: "Sorry, username or password is incorrect.",
+    },
+  };
+}
+
+async function signUp(_) {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   return {
     errors: {
       username: "Sorry, this username is taken.",
-      password: "Sorry, this password is incorrect.",
     },
   };
 }
