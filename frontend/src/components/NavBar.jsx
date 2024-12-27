@@ -13,6 +13,8 @@ import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { Image } from "@nextui-org/image";
 import { LoginSignUpModal } from "./LoginSignUpModal";
+import { useAuthStore } from "../store/authStore";
+import { logout } from "../service/apiService";
 import "../styles/NavBar.css";
 import LogoImage from "../assets/anime-girl-logo.svg";
 
@@ -20,6 +22,7 @@ export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const LoginModalController = useDisclosure();
   const RegisterModalController = useDisclosure();
+  const { isAuthenticated, setLogout } = useAuthStore();
 
   const menuItems = [
     "Sfw Images",
@@ -27,6 +30,16 @@ export const NavBar = () => {
     "Favorites",
     "Log Out",
   ];
+
+  const onlogout = async () => {
+    try {
+      const response = await logout();
+      console.log(response.message);
+      setLogout();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} className="navbar-container">
@@ -57,25 +70,38 @@ export const NavBar = () => {
             Nsfw Images
           </Link>
         </NavbarItem>
-{/*         <NavbarItem>
-          <Link className="hover:text-danger-600 transition-colors" color="danger" href="/user/favorites">
-            Favorites
-          </Link>
-        </NavbarItem> */}
+        {isAuthenticated &&
+          <NavbarItem>
+            <Link className="hover:text-danger-600 transition-colors" color="danger" href="/user/favorites">
+              Favorites
+            </Link>
+          </NavbarItem>}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
-          <Button className="text-inherit" color="secondary" variant="light" onPress={LoginModalController.onOpen}>
-            Login
-          </Button>
-          <LoginSignUpModal mode={"login"} isOpen={LoginModalController.isOpen} onOpenChange={LoginModalController.onOpenChange}/>
-        </NavbarItem>
-        <NavbarItem>
-          <Button className="text-inherit" color="secondary" variant="ghost" onPress={RegisterModalController.onOpen}>
-            Sign Up
-          </Button>
-          <LoginSignUpModal mode={"signUp"} isOpen={RegisterModalController.isOpen} onOpenChange={RegisterModalController.onOpenChange}/>
-        </NavbarItem>
+
+        {isAuthenticated ?
+          <NavbarItem>
+            <Button color="danger" variant="light" className="text-inherit" onPress={onlogout}>
+              Log Out
+            </Button>
+          </NavbarItem>
+          :
+          <>
+            <NavbarItem>
+              <Button className="text-inherit" color="secondary" variant="light" onPress={LoginModalController.onOpen}>
+                Login
+              </Button>
+              <LoginSignUpModal mode={"login"} isOpen={LoginModalController.isOpen} onOpenChange={LoginModalController.onOpenChange} />
+            </NavbarItem>
+            <NavbarItem>
+              <Button className="text-inherit" color="secondary" variant="ghost" onPress={RegisterModalController.onOpen}>
+                Sign Up
+              </Button>
+              <LoginSignUpModal mode={"signUp"} isOpen={RegisterModalController.isOpen} onOpenChange={RegisterModalController.onOpenChange} />
+            </NavbarItem>
+          </>
+        }
+
       </NavbarContent>
       <NavbarMenu className="navbar-menu">
         {menuItems.map((item, index) => (
