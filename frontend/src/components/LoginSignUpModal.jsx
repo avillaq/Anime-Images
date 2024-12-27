@@ -104,6 +104,13 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
                     variant="bordered"
                     value={username}
                     onValueChange={setUsername}
+                    classNames={{
+                      inputWrapper: [
+                        "border-[#481878]",
+                        "data-[hover=true]:border-[#6020a0]",
+                        "group-data-[focus=true]:border-[#9353d3]",
+                      ],
+                    }}
                   />
                   <Input
                     validate={(value) => validate(value, "Password")}
@@ -114,6 +121,13 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
                     variant="bordered"
                     value={password}
                     onValueChange={setPassword}
+                    classNames={{
+                      inputWrapper: [
+                        "border-[#481878]",
+                        "data-[hover=true]:border-[#6020a0]",
+                        "group-data-[focus=true]:border-[#9353d3]",
+                      ],
+                    }}
                   />
                   <div className="flex gap-3 mt-6 justify-end w-full">
                     <Button color="danger" variant="light" isDisabled={isLoading} onPress={onClose}>

@@ -5,5 +5,5 @@
 
 .navbar-menu {
   backdrop-filter: blur(24px);
-  background-color: rgba(8, 4, 17, .2);
+  background-color: rgba(8, 4, 17, 0.2);
 }
