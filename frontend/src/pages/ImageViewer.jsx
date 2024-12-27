@@ -2,8 +2,8 @@ import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
-import { fetchTags } from "../service/apiService";
-import WelcomeImage from "../assets/anime-maid.webp";
+import { fetchTags, fetchRandomImage } from "../service/apiService";
+import AnimePlaceholder from "../assets/anime-placeholder.webp";
 import "../styles/ImageViewer.css";
 
 export const animals = [
@@ -25,6 +25,7 @@ export const animals = [
 export const ImageViewer = ({ type }) => {
   const [category, SetCategory] = useState("");
   const [tags, setTags] = useState([]);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const getTags = async () => {
@@ -39,9 +40,19 @@ export const ImageViewer = ({ type }) => {
         console.error(error);
       }
     }
-    
+
     getTags();
   }, []);
+
+  const fetchImage = async () => {
+    try {
+      const response = await fetchRandomImage(type, category);
+      setImage(response.image_url);
+    } catch (error) {
+      console.error(error);
+    }
+    
+  };
 
   return (
     <section className="image-viewer-container">
@@ -58,7 +69,7 @@ export const ImageViewer = ({ type }) => {
           >
             {(t) => <SelectItem>{t.label}</SelectItem>}
           </Select>
-          <Button className="min-w-8" isDisabled={!category} onPress={() => console.log(`${category}`)} color={type === "sfw" ? "secondary" : "danger"}>
+          <Button className="min-w-8" isDisabled={!category} onPress={fetchImage} color={type === "sfw" ? "secondary" : "danger"}>
             Get Image
           </Button>
         </div>
@@ -66,7 +77,7 @@ export const ImageViewer = ({ type }) => {
       <figure className="image-viewer-image-container">
         <Image
           alt="Anime Image Placeholder"
-          src={WelcomeImage}
+          src={image || AnimePlaceholder}
           draggable={false}
         />
       </figure>
