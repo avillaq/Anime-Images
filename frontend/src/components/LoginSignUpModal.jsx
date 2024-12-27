@@ -8,8 +8,11 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Form } from "@nextui-org/form";
 import { useState } from "react";
+import { useAuthStore } from "../store/authStore";
+import { login } from "../service/apiService";
 
 export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
+  const { setAccessToken } = useAuthStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -47,12 +50,15 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
       result = await signUp(data);
     }
     
-    if (!result.errors) {
-      // TODO: Logic to save the user token in the local storage.
+    if (!result.error) {
+      setAccessToken(result.access_token);
+
+      // TODO: Show a toast message: resut.message
+      
       resetStates();
     }
 
-    setErrors(result.errors);
+    setErrors(result.error);
     setIsLoading(false);
 
   };
@@ -146,7 +152,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
     </>
   );
 }
-
+/*
 // Fake server used in this example.
 async function login(_) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -158,7 +164,7 @@ async function login(_) {
     },
   };
 }
-
+*/
 async function signUp(_) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
