@@ -1,7 +1,8 @@
 import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
+import { fetchTags } from "../service/apiService";
 import WelcomeImage from "../assets/anime-maid.webp";
 import "../styles/ImageViewer.css";
 
@@ -22,7 +23,25 @@ export const animals = [
 ];
 
 export const ImageViewer = ({ type }) => {
-  const [category, SetCategory] = useState();
+  const [category, SetCategory] = useState("");
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    const getTags = async () => {
+      try {
+        const response = await fetchTags();
+        const formattedTags = response[type].map((tag) => ({
+          key: tag,
+          label: tag.charAt(0).toUpperCase() + tag.slice(1),
+        }));
+        setTags(formattedTags);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    
+    getTags();
+  }, []);
 
   return (
     <section className="image-viewer-container">
@@ -31,13 +50,13 @@ export const ImageViewer = ({ type }) => {
         <div className="image-viewer-select-container">
           <Select
             variant="bordered"
-            color={type === "sfw" ? "secondary" : "danger" }
+            color={type === "sfw" ? "secondary" : "danger"}
             className="max-w-xs"
             label="Select a category"
             onChange={(e) => SetCategory(e.target.value)}
-            items={animals}
+            items={tags}
           >
-            {(animal) => <SelectItem>{animal.label}</SelectItem>}
+            {(t) => <SelectItem>{t.label}</SelectItem>}
           </Select>
           <Button className="min-w-8" isDisabled={!category} onPress={() => console.log(`${category}`)} color={type === "sfw" ? "secondary" : "danger"}>
             Get Image

@@ -70,8 +70,8 @@ def get_tags():
     nsfw_tags = set(IMAGES_TAGS["waifu.im"]["nsfw"] + IMAGES_TAGS["waifu.pics"]["nsfw"])
 
     return {
-        "sfw_tags": list(sfw_tags),
-        "nsfw_tags": list(nsfw_tags)
+        "sfw": list(sfw_tags),
+        "nsfw": list(nsfw_tags)
     }
 
 
