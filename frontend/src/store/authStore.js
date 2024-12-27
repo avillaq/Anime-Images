@@ -12,7 +12,7 @@ export const useAuthStore = create(
           isAuthenticated: true,
         });
       },
-      logout: () => 
+      setLogout: () => 
         set({ 
           access_token: null,
           isAuthenticated: false,
