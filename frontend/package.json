@@ -23,6 +23,7 @@
     "@nextui-org/spinner": "^2.2.5",
     "@nextui-org/system": "^2.4.5",
     "@nextui-org/theme": "^2.4.4",
+    "axios": "^1.7.9",
     "framer-motion": "^11.15.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
