@@ -32,7 +32,7 @@ def register():
         db.session.rollback()
         return jsonify({
             "error": {
-                "username": f"{username} is already taken"
+                "username": "Username is already taken"
             }
         }), 400
 

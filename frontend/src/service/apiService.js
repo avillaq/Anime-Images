@@ -10,7 +10,7 @@ export const login = async ({ username, password }) => {
   }
 };
 
-export const register = async ({ username, password }) => {
+export const signUp = async ({ username, password }) => {
   try {
     const response = await axiosInstance.post(API_CONFIG.endpoints.auth.register, { username, password });
     return response.data;
