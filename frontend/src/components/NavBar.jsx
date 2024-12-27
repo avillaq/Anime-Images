@@ -14,7 +14,7 @@ import { Link } from "@nextui-org/link";
 import { Image } from "@nextui-org/image";
 import { LoginSignUpModal } from "./LoginSignUpModal";
 import { useAuthStore } from "../store/authStore";
-import { logout } from "../service/apiService";
+import { logOut } from "../service/apiService";
 import "../styles/NavBar.css";
 import LogoImage from "../assets/anime-girl-logo.svg";
 
@@ -31,9 +31,9 @@ export const NavBar = () => {
     "Log Out",
   ];
 
-  const onlogout = async () => {
+  const onLogout = async () => {
     try {
-      const response = await logout();
+      const response = await logOut();
       console.log(response.message);
       setLogout();
     } catch (error) {
@@ -81,7 +81,7 @@ export const NavBar = () => {
 
         {isAuthenticated ?
           <NavbarItem>
-            <Button color="danger" variant="light" className="text-inherit" onPress={onlogout}>
+            <Button color="danger" variant="light" className="text-inherit" onPress={onLogout}>
               Log Out
             </Button>
           </NavbarItem>

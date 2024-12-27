@@ -9,7 +9,7 @@ import { Input } from "@nextui-org/input";
 import { Form } from "@nextui-org/form";
 import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
-import { login, signUp } from "../service/apiService";
+import { logIn, signUp } from "../service/apiService";
 
 export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
   const { setAccessToken } = useAuthStore();
@@ -45,7 +45,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
 
     let result = {};
     if (mode === "login") {
-      result = await login(data);
+      result = await logIn(data);
     } else {
       result = await signUp(data);
     }

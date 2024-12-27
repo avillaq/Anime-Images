@@ -12,7 +12,7 @@ export const axiosInstance = axios.create({
 export const setupInterceptors = (useAuthStore) => {
   axiosInstance.interceptors.request.use(
     async (config) => {
-      const { access_token, setAccessToken, logout } = useAuthStore.getState();
+      const { access_token, setAccessToken, setLogout } = useAuthStore.getState();
   
       if (access_token) {
         const tokenData = jwtDecode(access_token);
@@ -25,7 +25,7 @@ export const setupInterceptors = (useAuthStore) => {
             setAccessToken(response.data.access_token);
             config.headers.Authorization = `Bearer ${response.data.access_token}`;
           } catch (error) {
-            logout();
+            setLogout();
             window.location.href = "/login";
           }
         } else {

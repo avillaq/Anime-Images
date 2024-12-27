@@ -1,7 +1,7 @@
 import { axiosInstance } from "./axiosInstance";
 import { API_CONFIG } from "../config/api.config";
 
-export const login = async ({ username, password }) => {
+export const logIn = async ({ username, password }) => {
   try {
     const response = await axiosInstance.post(API_CONFIG.endpoints.auth.login, { username, password });
     return response.data;
@@ -19,7 +19,7 @@ export const signUp = async ({ username, password }) => {
   }
 };
 
-export const logout = async () => {
+export const logOut = async () => {
   try {
     const response = await axiosInstance.post(API_CONFIG.endpoints.auth.logout);
     return response.data;
@@ -42,6 +42,8 @@ export const fetchTags = async () => {
     const response = await axiosInstance.get(API_CONFIG.endpoints.images.tags);
     return response.data;
   } catch (error) {
+    console.log(error);
+    
     return error.response.data;
   }
 };
