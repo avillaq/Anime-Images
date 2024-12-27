@@ -19,6 +19,15 @@ export const signUp = async ({ username, password }) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    const response = await axiosInstance.post(API_CONFIG.endpoints.auth.logout);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export const fetchRandomImage = async (type, tag) => {
   try {
     const response = await axiosInstance.post(API_CONFIG.endpoints.images.getRandom, { type, tag });
