@@ -31,7 +31,9 @@ def register():
     except:
         db.session.rollback()
         return jsonify({
-            "error": "Sorry, this username is taken"
+            "error": {
+                "username": f"{username} is already taken"
+            }
         }), 400
 
     return jsonify({
@@ -49,7 +51,10 @@ def login():
         user = guard.authenticate(username, password)
     except:
         return jsonify({
-            "error": "Username or password is incorrect"
+            "error": {
+                "username": "Username or password is incorrect",
+                "password": "Username or password is incorrect"
+            }
         }), 400
     
     return jsonify({
