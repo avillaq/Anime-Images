@@ -1,8 +1,6 @@
 export const API_CONFIG = {
   baseUrl: import.meta.env.VITE_API_URL || "http://localhost:5000",
   endpoints: {
-    calculator: "/calculator/",
-    affiliateInfo: "/calculator/:username/",
     auth: {
       login: "/auth/login/",
       logout: "/auth/logout/",
