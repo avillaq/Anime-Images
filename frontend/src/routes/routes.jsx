@@ -2,12 +2,16 @@ import { Home } from '../pages/Home';
 import { ImageViewer } from '../pages/ImageViewer';
 import { Favorites } from '../pages/Favorites';
 import { NotFound } from '../pages/NotFound';
+import { useAuthStore } from '../store/authStore';
+import { Navigate } from 'react-router-dom';
 
 export const SFWViewer = () => (<ImageViewer type={"sfw"}/>)
 export const NSFWViewer = () => (<ImageViewer type={"nsfw"}/>)
 export const UserFavorites = () => {
-  /* Incomplete logic to validate an user */
-
+  const { isAuthenticated } = useAuthStore();
+  if (!isAuthenticated) {
+    return <Navigate to="/"/>
+  }
   return (<Favorites/>)
 }
 
