@@ -61,22 +61,3 @@ class Favorite(db.Model):
             "image_url": self.image_url,
             "source_api": self.source_api,
         }
-
-class Download_history(db.Model):
-    __tablename__ = "download_history"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, primary_key=True)
-    image_url = db.Column(db.String(255), nullable=False)
-    downloaded_at = db.Column(db.DateTime, server_default=db.func.now())
-
-    def __repr__(self):
-        return f"<Download_history {self.user_id} {self.image_url}>"
-
-    def format(self):
-        return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "image_url": self.image_url,
-            "downloaded_at": self.downloaded_at,
-        }

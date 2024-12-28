@@ -1,6 +1,6 @@
 from app.api import bp
 from app.api.api_images import fetch_image, get_tags
-from app.api.models import User, Favorite, Download_history
+from app.api.models import User, Favorite
 from app.extensions import db, limiter, guard, cache, blacklist
 import flask_praetorian
 from flask import jsonify, request, send_file
@@ -171,15 +171,7 @@ def delete_favorite():
 
 @bp.route("/images/download", methods=["POST"])
 @limiter.limit("30/minute")
-@flask_praetorian.auth_accepted
 def get_download():
-    try:
-        user = flask_praetorian.current_user()
-        user_id = user.id
-    except:
-        # If the user is not authenticated, set the user_id to anonymous user id
-        user_id = 6
-
     image_url = request.get_json(force=True).get("image_url", None)
     #source_api = request.get_json(force=True).get("source_api", None)
 
@@ -195,19 +187,6 @@ def get_download():
             "error": "Download failed"
         }), 400
     
-    new_download = Download_history(
-        user_id=user_id,
-        image_url=image_url
-    )
-    try:
-        db.session.add(new_download)
-        db.session.commit()
-    except:
-        db.session.rollback()
-        return jsonify({
-            "error": "Unknown error"
-    }), 400
-
     filename = image_url.split("/")[-1]
     content_type = response.headers.get("Content-Type", "image/jpeg")
 
