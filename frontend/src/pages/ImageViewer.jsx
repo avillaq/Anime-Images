@@ -35,6 +35,7 @@ export const ImageViewer = ({ type }) => {
 
   const fetchImage = async () => {
     try {
+      setImage("");
       const response = await fetchRandomImage(type, category);
       setImage(response.image_url);
     } catch (error) {
