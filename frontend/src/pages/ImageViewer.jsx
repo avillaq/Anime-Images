@@ -3,6 +3,7 @@ import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
 import { fetchTags, fetchRandomImage } from "../service/apiService";
+import { useAuthStore } from "../store/authStore";
 import Heart from "react-heart";
 import AnimePlaceholder from "../assets/anime-placeholder.webp";
 import "../styles/ImageViewer.css";
@@ -11,8 +12,9 @@ export const ImageViewer = ({ type }) => {
   const [category, SetCategory] = useState("");
   const [tags, setTags] = useState([]);
   const [image, setImage] = useState("");
+  const { isAuthenticated } = useAuthStore();
 
-  const [heartActive, setHeartActive] = useState(false)
+  const [heartActive, setHeartActive] = useState(false);
 
   useEffect(() => {
     const getTags = async () => {
@@ -40,6 +42,28 @@ export const ImageViewer = ({ type }) => {
     }
   };
 
+  const addToFavorites = async () => {
+    if (!isAuthenticated) {
+      alert("You need to be logged in to add images to favorites.");
+      return;
+    } 
+    if (heartActive){
+      try {
+        alert("Image removed from favorites.");
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        alert("Image added to favorites.");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    setHeartActive(!heartActive);
+
+  };
+
   return (
     <section className="image-viewer-container">
       <div className="image-viewer-content-container">
@@ -65,7 +89,7 @@ export const ImageViewer = ({ type }) => {
           <Button color="danger" variant="bordered" isDisabled={!image}>
             <Heart
               isActive={heartActive}
-              onClick={() => setHeartActive(!heartActive)}
+              onClick={() => addToFavorites()}
               animationScale={1.30}
               inactiveColor="white"
               activeColor="red"
