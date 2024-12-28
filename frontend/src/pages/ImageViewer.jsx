@@ -7,7 +7,6 @@ import { useAuthStore } from "../store/authStore";
 import Heart from "react-heart";
 import AnimePlaceholder from "../assets/anime-placeholder.webp";
 import "../styles/ImageViewer.css";
-import { use } from "react";
 
 export const ImageViewer = ({ type }) => {
   const [category, SetCategory] = useState("");
