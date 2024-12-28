@@ -38,7 +38,6 @@ export const ImageViewer = ({ type }) => {
     } catch (error) {
       console.error(error);
     }
-
   };
 
   return (
@@ -62,12 +61,20 @@ export const ImageViewer = ({ type }) => {
         </div>
       </div>
       <div className="image-viewer-image-container">
-        <Button color="danger" variant="light" className="p-0 min-w-14">
-          <Heart isActive={heartActive} onClick={() => setHeartActive(!heartActive)} animationScale = {1.25} inactiveColor="white" activeColor="red"/>
-        </Button>
-        <Button>
-          Download
-        </Button>
+        <div className="image-viewer-action-container">
+          <Button color="danger" variant="bordered" className="">
+            <Heart
+              isActive={heartActive}
+              onClick={() => setHeartActive(!heartActive)}
+              animationScale={1.30}
+              inactiveColor="white"
+              activeColor="red"
+            />
+          </Button>
+          <Button color="secondary" variant="ghost" className="text-inherit">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Download"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path> </g> </g></svg>
+          </Button>
+        </div>
         <figure>
           <Image
             alt="Anime Image Placeholder"
