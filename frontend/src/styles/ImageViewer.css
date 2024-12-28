@@ -35,11 +35,19 @@ div[data-slot^="listboxWrapper"] {
 
 .image-viewer-image-container {
   display: flex;
+  flex-direction: column;
+  gap: 24px;
   justify-content: center;
   margin-bottom: 24px;
   margin: 0 auto;
   min-width: 300px;
   max-width: 700px;
+}
+
+.image-viewer-action-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
 }
 
 @media (min-width: 768px) {
