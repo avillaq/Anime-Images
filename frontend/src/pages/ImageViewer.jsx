@@ -3,29 +3,16 @@ import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
 import { fetchTags, fetchRandomImage } from "../service/apiService";
+import Heart from "react-heart";
 import AnimePlaceholder from "../assets/anime-placeholder.webp";
 import "../styles/ImageViewer.css";
-
-export const animals = [
-  { key: "cat", label: "Cat" },
-  { key: "dog", label: "Dog" },
-  { key: "elephant", label: "Elephant" },
-  { key: "lion", label: "Lion" },
-  { key: "tiger", label: "Tiger" },
-  { key: "giraffe", label: "Giraffe" },
-  { key: "dolphin", label: "Dolphin" },
-  { key: "penguin", label: "Penguin" },
-  { key: "zebra", label: "Zebra" },
-  { key: "shark", label: "Shark" },
-  { key: "whale", label: "Whale" },
-  { key: "otter", label: "Otter" },
-  { key: "crocodile", label: "Crocodile" },
-];
 
 export const ImageViewer = ({ type }) => {
   const [category, SetCategory] = useState("");
   const [tags, setTags] = useState([]);
   const [image, setImage] = useState("");
+
+  const [heartActive, setHeartActive] = useState(false)
 
   useEffect(() => {
     const getTags = async () => {
@@ -51,7 +38,7 @@ export const ImageViewer = ({ type }) => {
     } catch (error) {
       console.error(error);
     }
-    
+
   };
 
   return (
@@ -74,13 +61,22 @@ export const ImageViewer = ({ type }) => {
           </Button>
         </div>
       </div>
-      <figure className="image-viewer-image-container">
-        <Image
-          alt="Anime Image Placeholder"
-          src={image || AnimePlaceholder}
-          draggable={false}
-        />
-      </figure>
+      <div className="image-viewer-image-container">
+        <Button color="danger" variant="light" className="p-0 min-w-14">
+          <Heart isActive={heartActive} onClick={() => setHeartActive(!heartActive)} animationScale = {1.25} inactiveColor="white" activeColor="red"/>
+        </Button>
+        <Button>
+          Download
+        </Button>
+        <figure>
+          <Image
+            alt="Anime Image Placeholder"
+            src={image || AnimePlaceholder}
+            draggable={false}
+          />
+        </figure>
+      </div>
+
     </section>
   )
 }
