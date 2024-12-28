@@ -13,6 +13,7 @@ export const ImageViewer = ({ type }) => {
   const [tags, setTags] = useState([]);
   const [image, setImage] = useState("");
   const { isAuthenticated } = useAuthStore();
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const [heartActive, setHeartActive] = useState(false);
 
@@ -65,6 +66,7 @@ export const ImageViewer = ({ type }) => {
 
   const onDownload = async () => {
     try {
+      setIsDownloading(true);
       const response = await downloadImage(image);
       const contentDisposition = response.headers["content-disposition"];
       const filename = contentDisposition
@@ -81,6 +83,8 @@ export const ImageViewer = ({ type }) => {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -115,7 +119,7 @@ export const ImageViewer = ({ type }) => {
               activeColor="red"
             />
           </Button>
-          <Button color="secondary" variant="ghost" className="text-inherit" isDisabled={!image} onPress={onDownload}>
+          <Button color="secondary" variant="ghost" className="text-inherit" isDisabled={!image || isDownloading} onPress={onDownload}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px"><g strokeWidth="0" id="SVGRepo_bgCarrier"></g><g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Download"> <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path> </g> </g></svg>
           </Button>
         </div>
