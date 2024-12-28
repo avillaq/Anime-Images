@@ -47,20 +47,18 @@ export const ImageViewer = ({ type }) => {
       alert("You need to be logged in to add images to favorites.");
       return;
     } 
-    if (heartActive){
-      try {
+
+    try {
+      if (heartActive) {
         alert("Image removed from favorites.");
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      try {
+      } else {
         alert("Image added to favorites.");
-      } catch (error) {
-        console.error(error);
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setHeartActive(!heartActive);
     }
-    setHeartActive(!heartActive);
 
   };
 
