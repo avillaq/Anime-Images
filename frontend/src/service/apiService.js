@@ -55,8 +55,6 @@ export const downloadImage = async (imageUrl) => {
       { 
         responseType: 'blob'
       });
-    console.log(response);
-    
     return response;
   } catch (error) {
     throw error;
