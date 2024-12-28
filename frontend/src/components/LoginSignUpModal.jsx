@@ -52,7 +52,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
     
     if (!result.error) {
       setAccessToken(result.access_token);
-      console.log(response.message);
+      console.log(result.message);
       // TODO: Show a toast message: resut.message
 
       resetStates();

@@ -19,9 +19,7 @@ export const setupInterceptors = (useAuthStore) => {
         const isExpired = tokenData.exp * 1000 < Date.now();
         if (isExpired) {
           try {
-            const response = await axios.post("/auth/refresh", {
-              token: refreshToken
-            });
+            const response = await axios.post("/auth/refresh");
             setAccessToken(response.data.access_token);
             config.headers.Authorization = `Bearer ${response.data.access_token}`;
           } catch (error) {
