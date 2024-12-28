@@ -48,4 +48,19 @@ export const fetchTags = async () => {
   }
 };
 
+export const downloadImage = async (imageUrl) => {
+  try {
+    const response = await axiosInstance.post(API_CONFIG.endpoints.images.download, 
+      { image_url: imageUrl },
+      { 
+        responseType: 'blob'
+      });
+    console.log(response);
+    
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // TODO: Implement more API service functions 
