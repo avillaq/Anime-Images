@@ -1,24 +1,25 @@
 .image-viewer-container {
-  padding: 3rem 0;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
 .image-viewer-content-container h1 {
-  font-size: 36px;
-  line-height: normal;
-  font-weight: 700;
-  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 
 .image-viewer-select-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 500px;
 }
 
 div[data-slot^="content"] {
@@ -41,27 +42,24 @@ div[data-slot^="listboxWrapper"] {
   margin-bottom: 24px;
   margin: 0 auto;
   min-width: 300px;
-  max-width: 700px;
+  max-width: 900px;
 }
 
 .image-viewer-action-container {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 @media (min-width: 768px) {
   .image-viewer-container {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
 }
 
 @media (min-width: 1024px) {
   .image-viewer-container {
-    padding: 6rem 0;
+    padding: 4rem 0;
     flex-direction: row;
-  }
-  .image-viewer-content-container {
-    width: 30%;
   }
 }
