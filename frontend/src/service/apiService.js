@@ -61,4 +61,22 @@ export const downloadImage = async (imageUrl) => {
   }
 };
 
+export const fetchFavorites = async () => {
+  try {
+    const response = await axiosInstance.get(API_CONFIG.endpoints.user.getFavorites);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const addToFavorites = async (imageUrl) => {
+  try {
+    const response = await axiosInstance.post(API_CONFIG.endpoints.user.addFavorites, { image_url: imageUrl });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 // TODO: Implement more API service functions 
