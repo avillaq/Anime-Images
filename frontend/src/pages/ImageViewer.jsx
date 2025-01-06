@@ -38,7 +38,7 @@ export const ImageViewer = ({ type }) => {
     if (!isAuthenticated) {
       setHeartActive(false);
     }
-  },[isAuthenticated]);
+  }, [isAuthenticated]);
 
   const fetchImage = async () => {
     try {
@@ -115,7 +115,7 @@ export const ImageViewer = ({ type }) => {
         </div>
       </div>
       <div className="image-viewer-image-container">
-      <figure>
+        <figure>
           <Image
             alt="Anime Image Placeholder"
             src={image || AnimePlaceholder}
