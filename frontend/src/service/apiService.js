@@ -79,4 +79,15 @@ export const addToFavorites = async (imageUrl) => {
   }
 };
 
+export const removeFromFavorites = async (imageUrl) => {
+  try {
+    const response = await axiosInstance.delete(API_CONFIG.endpoints.user.deleteFavorites, { 
+      data: { image_url: imageUrl }
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 // TODO: Implement more API service functions 
