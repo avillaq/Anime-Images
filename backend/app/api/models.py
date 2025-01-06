@@ -48,7 +48,6 @@ class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(255), nullable=False)
-    source_api = db.Column(db.String(255), nullable=False)
     added_at = db.Column(db.DateTime, server_default=db.func.now())
 
     __table_args__ = (db.UniqueConstraint("user_id", "image_url", name="user_id_image_url"),)
@@ -58,6 +57,5 @@ class Favorite(db.Model):
 
     def format(self):
         return {
-            "image_url": self.image_url,
-            "source_api": self.source_api,
+            "image_url": self.image_url
         }

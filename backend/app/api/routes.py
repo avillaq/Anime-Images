@@ -115,13 +115,7 @@ def add_favorite():
         }), 400
 
     user_id = user.id
-    source_api = request.get_json(force=True).get("source_api", None)
     image_url = request.get_json(force=True).get("image_url", None)
-
-    if "waifu.im" not in source_api and "waifu.pics" not in source_api:
-        return jsonify({
-            "error": "Invalid source API"
-        }), 400
     
     if "https://i.waifu.pics/" not in image_url and "https://cdn.waifu.im/" not in image_url:
         return jsonify({
@@ -130,8 +124,7 @@ def add_favorite():
 
     new_favorite = Favorite(
         user_id=user_id,
-        image_url=image_url,
-        source_api=source_api
+        image_url=image_url
     )
     try:
         db.session.add(new_favorite)
@@ -173,7 +166,6 @@ def delete_favorite():
 @limiter.limit("30/minute")
 def get_download():
     image_url = request.get_json(force=True).get("image_url", None)
-    #source_api = request.get_json(force=True).get("source_api", None)
 
     if "https://i.waifu.pics/" not in image_url and "https://cdn.waifu.im/" not in image_url:
         return jsonify({
@@ -212,7 +204,6 @@ def get_image():
 
 
 @bp.route("/images/tags", methods=["GET"])
-@limiter.limit("10/minute")
 @cache.cached(timeout=3600)
 def get_all_tags():
     tags = get_tags()
