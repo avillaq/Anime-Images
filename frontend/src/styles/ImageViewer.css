@@ -42,7 +42,7 @@ div[data-slot^="listboxWrapper"] {
   margin-bottom: 24px;
   margin: 0 auto;
   min-width: 300px;
-  max-width: 900px;
+  max-width: 500px;
 }
 
 .image-viewer-action-container {
