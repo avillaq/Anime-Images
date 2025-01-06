@@ -2,7 +2,7 @@ import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
-import { fetchTags, fetchRandomImage, downloadImage } from "../service/apiService";
+import { fetchTags, fetchRandomImage, downloadImage, addToFavorites, removeFromFavorites } from "../service/apiService";
 import { useAuthStore } from "../store/authStore";
 import Heart from "react-heart";
 import AnimePlaceholder from "../assets/anime-placeholder.webp";
@@ -42,6 +42,7 @@ export const ImageViewer = ({ type }) => {
 
   const fetchImage = async () => {
     try {
+      setHeartActive(false);
       setImage("");
       const response = await fetchRandomImage(type, category);
       setImage(response.image_url);
@@ -50,18 +51,20 @@ export const ImageViewer = ({ type }) => {
     }
   };
 
-  const addToFavorites = async () => {
+  const toggleFavorites = async () => {
     if (!isAuthenticated) {
       alert("You need to be logged in to add images to favorites.");
       return;
     }
 
     try {
+      let response;
       if (heartActive) {
-        alert("Image removed from favorites.");
+        response = await removeFromFavorites(image);
       } else {
-        alert("Image added to favorites.");
+        response = await addToFavorites(image);
       }
+      alert(response);
     } catch (error) {
       console.error(error);
     } finally {
@@ -126,7 +129,7 @@ export const ImageViewer = ({ type }) => {
           <Button color="danger" variant="bordered" isDisabled={!image}>
             <Heart
               isActive={heartActive}
-              onClick={() => addToFavorites()}
+              onClick={() => toggleFavorites()}
               animationScale={1.30}
               inactiveColor="white"
               activeColor="red"
