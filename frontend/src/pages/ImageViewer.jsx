@@ -14,6 +14,7 @@ export const ImageViewer = ({ type }) => {
   const [image, setImage] = useState("");
   const { isAuthenticated } = useAuthStore();
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isToggleFavorites, setIsToggleFavorites] = useState(false);
 
   const [heartActive, setHeartActive] = useState(false);
 
@@ -57,6 +58,7 @@ export const ImageViewer = ({ type }) => {
       return;
     }
 
+    setIsToggleFavorites(true);
     let result;
     if (heartActive) {
       result = await removeFromFavorites(image);
@@ -66,11 +68,12 @@ export const ImageViewer = ({ type }) => {
 
     if (result.error) {
       alert(result.error);
-      return;
+    } else {
+      alert(result.message);
+      // TODO: Show a toast message: resut.message
+      setHeartActive(!heartActive);
     }
-    alert(result.message);
-    // TODO: Show a toast message: resut.message
-    setHeartActive(!heartActive);
+    setIsToggleFavorites(false);
 
   };
 
@@ -127,7 +130,7 @@ export const ImageViewer = ({ type }) => {
           />
         </figure>
         <div className="image-viewer-action-container">
-          <Button color="danger" variant="bordered" isDisabled={!image}>
+          <Button color="danger" variant="bordered" isDisabled={!image || isToggleFavorites}>
             <Heart
               isActive={heartActive}
               onClick={() => toggleFavorites()}
