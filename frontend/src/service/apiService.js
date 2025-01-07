@@ -68,6 +68,16 @@ export const fetchFavorites = async () => {
   }
 };
 
+export const fetchFavorite = async (imageUrl) => {
+  try {
+    const encodedUrl = encodeURIComponent(imageUrl);
+    const response = await axiosInstance.get(`${API_CONFIG.endpoints.user.getFavorites}/${encodedUrl}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export const addToFavorites = async (imageUrl) => {
   try {
     const response = await axiosInstance.post(API_CONFIG.endpoints.user.addFavorites, { image_url: imageUrl });
@@ -79,9 +89,8 @@ export const addToFavorites = async (imageUrl) => {
 
 export const removeFromFavorites = async (imageUrl) => {
   try {
-    const response = await axiosInstance.delete(API_CONFIG.endpoints.user.deleteFavorites, {
-      data: { image_url: imageUrl }
-    });
+    const encodedUrl = encodeURIComponent(imageUrl);
+    const response = await axiosInstance.delete(`${API_CONFIG.endpoints.user.deleteFavorites}/${encodedUrl}`);
     return response.data;
   } catch (error) {
     return error.response.data;
