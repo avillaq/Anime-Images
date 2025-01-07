@@ -42,17 +42,15 @@ export const fetchTags = async () => {
     const response = await axiosInstance.get(API_CONFIG.endpoints.images.tags);
     return response.data;
   } catch (error) {
-    console.log(error);
-    
     return error.response.data;
   }
 };
 
 export const downloadImage = async (imageUrl) => {
   try {
-    const response = await axiosInstance.post(API_CONFIG.endpoints.images.download, 
+    const response = await axiosInstance.post(API_CONFIG.endpoints.images.download,
       { image_url: imageUrl },
-      { 
+      {
         responseType: 'blob'
       });
     return response;
@@ -81,7 +79,7 @@ export const addToFavorites = async (imageUrl) => {
 
 export const removeFromFavorites = async (imageUrl) => {
   try {
-    const response = await axiosInstance.delete(API_CONFIG.endpoints.user.deleteFavorites, { 
+    const response = await axiosInstance.delete(API_CONFIG.endpoints.user.deleteFavorites, {
       data: { image_url: imageUrl }
     });
     return response.data;
