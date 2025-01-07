@@ -43,7 +43,7 @@ export const ImageViewer = ({ type }) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if (!image) {
+    if (!image || !isAuthenticated) {
       return;
     }
 
