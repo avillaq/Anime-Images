@@ -12,6 +12,7 @@ export const ImageViewer = ({ type }) => {
   const [category, SetCategory] = useState("");
   const [tags, setTags] = useState([]);
   const [image, setImage] = useState("");
+  const [isImageLoad, setIsImageLoad] = useState(true);
   const { isAuthenticated } = useAuthStore();
   const [isDownloading, setIsDownloading] = useState(false);
   const [isToggleFavorites, setIsToggleFavorites] = useState(false);
@@ -59,7 +60,7 @@ export const ImageViewer = ({ type }) => {
 
   const fetchImage = async () => {
     setHeartActive(false);
-    setImage("");
+    setIsImageLoad(false);
     const result = await fetchRandomImage(type, category);
     if (result.error) {
       alert(result.error);
@@ -143,10 +144,11 @@ export const ImageViewer = ({ type }) => {
             alt="Anime Image Placeholder"
             src={image || AnimePlaceholder}
             draggable={false}
+            onLoad={() => setIsImageLoad(true)}
           />
         </figure>
         <div className="image-viewer-action-container">
-          <Button color="danger" variant="bordered" isDisabled={!image || isToggleFavorites}>
+          <Button color="danger" variant="bordered" isDisabled={!image || isToggleFavorites || !isImageLoad}>
             <Heart
               isActive={heartActive}
               onClick={() => toggleFavorites()}
@@ -155,7 +157,7 @@ export const ImageViewer = ({ type }) => {
               activeColor="red"
             />
           </Button>
-          <Button color="secondary" variant="ghost" className="text-inherit" isDisabled={!image || isDownloading} onPress={onDownload}>
+          <Button color="secondary" variant="ghost" className="text-inherit" isDisabled={!image || isDownloading || !isImageLoad} onPress={onDownload}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px"><g strokeWidth="0" id="SVGRepo_bgCarrier"></g><g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Download"> <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path> </g> </g></svg>
           </Button>
         </div>
