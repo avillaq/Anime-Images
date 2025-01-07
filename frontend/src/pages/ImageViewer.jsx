@@ -2,7 +2,7 @@ import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
-import { fetchTags, fetchRandomImage, downloadImage, addToFavorites, removeFromFavorites } from "../service/apiService";
+import { fetchTags, fetchRandomImage, downloadImage, addToFavorites, removeFromFavorites, fetchFavorite } from "../service/apiService";
 import { useAuthStore } from "../store/authStore";
 import Heart from "react-heart";
 import AnimePlaceholder from "../assets/anime-placeholder.webp";
@@ -40,6 +40,22 @@ export const ImageViewer = ({ type }) => {
       setHeartActive(false);
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (!image) {
+      return;
+    }
+
+    const checkFavorite = async () => {
+      const response = await fetchFavorite(image);
+      if (response.error) {
+        return;
+      }
+      setHeartActive(true);
+    };
+
+    checkFavorite();
+  }, [image]);
 
   const fetchImage = async () => {
     setHeartActive(false);
