@@ -18,8 +18,8 @@ def home():
 @bp.route("/auth/register", methods=["POST"])
 @limiter.limit("5/minute")
 def register():
-    username = request.get_json(force=True).get("username", None)
-    password = request.get_json(force=True).get("password", None)
+    username = request.get_json().get("username", None)
+    password = request.get_json().get("password", None)
 
     new_user = User(
         username=username,
@@ -45,8 +45,8 @@ def register():
 @bp.route("/auth/login", methods=["POST"])
 @limiter.limit("5/minute")
 def login():
-    username = request.get_json(force=True).get("username", None)
-    password = request.get_json(force=True).get("password", None)
+    username = request.get_json().get("username", None)
+    password = request.get_json().get("password", None)
     try:
         user = guard.authenticate(username, password)
     except:
@@ -100,6 +100,19 @@ def get_favorites():
         "favorites": [favorite.format() for favorite in favorites.items]
     }), 200
 
+@bp.route("/user/favorites/<path:image_url>", methods=["GET"])   
+@flask_praetorian.auth_required
+def get_favorite(image_url):
+    user = flask_praetorian.current_user()
+    user_id = user.id
+
+    favorite = Favorite.query.filter_by(user_id=user_id, image_url=image_url).first()
+    if not favorite:
+        return jsonify({
+            "error": "Image not found in favorites"
+        }), 404
+
+    return jsonify(favorite.format()), 200
 
 @bp.route("/user/favorites", methods=["POST"])
 @limiter.limit("20/minute")
@@ -115,7 +128,7 @@ def add_favorite():
         }), 400
 
     user_id = user.id
-    image_url = request.get_json(force=True).get("image_url", None) 
+    image_url = request.get_json().get("image_url", None) 
     
     if "https://i.waifu.pics/" not in image_url and "https://cdn.waifu.im/" not in image_url:
         return jsonify({
@@ -140,13 +153,12 @@ def add_favorite():
     }), 201
 
 
-@bp.route("/user/favorites", methods=["DELETE"])
+@bp.route("/user/favorites/<path:image_url>", methods=["DELETE"])
 @limiter.limit("20/minute")
 @flask_praetorian.auth_required
-def delete_favorite():
+def delete_favorite(image_url):
     user = flask_praetorian.current_user()
     user_id = user.id
-    image_url = request.get_json(force=True).get("image_url", None)
 
     favorite = Favorite.query.filter_by(user_id=user_id, image_url=image_url).first()
     if not favorite:
@@ -165,7 +177,7 @@ def delete_favorite():
 @bp.route("/images/download", methods=["POST"])
 @limiter.limit("30/minute")
 def get_download():
-    image_url = request.get_json(force=True).get("image_url", None)
+    image_url = request.get_json().get("image_url", None)
 
     if "https://i.waifu.pics/" not in image_url and "https://cdn.waifu.im/" not in image_url:
         return jsonify({
@@ -193,8 +205,8 @@ def get_download():
 @bp.route("/images/random", methods=["POST"])
 @limiter.limit("30/minute")
 def get_image():
-    type = request.get_json(force=True).get("type",None)
-    tag = request.get_json(force=True).get("tag",None)
+    type = request.get_json().get("type",None)
+    tag = request.get_json().get("tag",None)
     image = fetch_image(tag, type)
 
     if image.get("error"):
