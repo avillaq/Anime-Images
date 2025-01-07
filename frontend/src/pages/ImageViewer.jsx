@@ -19,16 +19,16 @@ export const ImageViewer = ({ type }) => {
 
   useEffect(() => {
     const getTags = async () => {
-      try {
-        const response = await fetchTags();
-        const formattedTags = response[type].map((tag) => ({
-          key: tag,
-          label: tag.charAt(0).toUpperCase() + tag.slice(1),
-        }));
-        setTags(formattedTags);
-      } catch (error) {
-        console.error(error);
+      const result = await fetchTags();
+      if (result.error) {
+        alert(result.error);
+        return;
       }
+      const formattedTags = result[type].map((tag) => ({
+        key: tag,
+        label: tag.charAt(0).toUpperCase() + tag.slice(1),
+      }));
+      setTags(formattedTags);
     }
 
     getTags();
@@ -41,14 +41,14 @@ export const ImageViewer = ({ type }) => {
   }, [isAuthenticated]);
 
   const fetchImage = async () => {
-    try {
-      setHeartActive(false);
-      setImage("");
-      const response = await fetchRandomImage(type, category);
-      setImage(response.image_url);
-    } catch (error) {
-      console.error(error);
-    }
+    setHeartActive(false);
+    setImage("");
+    const result = await fetchRandomImage(type, category);
+    if (result.error) {
+      alert(result.error);
+      return;
+    } 
+    setImage(result.image_url);
   };
 
   const toggleFavorites = async () => {
@@ -57,19 +57,20 @@ export const ImageViewer = ({ type }) => {
       return;
     }
 
-    try {
-      let response;
-      if (heartActive) {
-        response = await removeFromFavorites(image);
-      } else {
-        response = await addToFavorites(image);
-      }
-      alert(response);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setHeartActive(!heartActive);
+    let result;
+    if (heartActive) {
+      result = await removeFromFavorites(image);
+    } else {
+      result = await addToFavorites(image);
     }
+
+    if (result.error) {
+      alert(result.error);
+      return;
+    }
+    alert(result.message);
+    // TODO: Show a toast message: resut.message
+    setHeartActive(!heartActive);
 
   };
 
@@ -91,7 +92,7 @@ export const ImageViewer = ({ type }) => {
       link.remove();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error(error);
+      alert("Failed to download image.");
     } finally {
       setIsDownloading(false);
     }
