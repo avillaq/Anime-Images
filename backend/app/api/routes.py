@@ -203,7 +203,7 @@ def get_download():
 
 
 @bp.route("/images/random", methods=["POST"])
-@limiter.limit("30/minute")
+@limiter.limit("20/minute")
 def get_image():
     type = request.get_json().get("type",None)
     tag = request.get_json().get("tag",None)
