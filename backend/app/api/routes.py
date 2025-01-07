@@ -115,7 +115,7 @@ def add_favorite():
         }), 400
 
     user_id = user.id
-    image_url = request.get_json(force=True).get("image_url", None)
+    image_url = request.get_json(force=True).get("image_url", None) 
     
     if "https://i.waifu.pics/" not in image_url and "https://cdn.waifu.im/" not in image_url:
         return jsonify({
