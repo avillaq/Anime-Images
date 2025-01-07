@@ -225,5 +225,5 @@ def get_all_tags():
 @bp.errorhandler(429)
 def ratelimit_error(e):
     return jsonify({
-        "error" : "Rate limit exceeded"
+        "error" : "Rate limit exceeded, please wait a while before trying again"
     }), 429
