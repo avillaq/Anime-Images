@@ -82,6 +82,8 @@ export const ImageViewer = ({ type }) => {
     } else {
       result = await addToFavorites(image);
     }
+    console.log(result);
+    
 
     if (result.error) {
       alert(result.error);

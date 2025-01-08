@@ -119,4 +119,3 @@ export const NavBar = () => {
     </Navbar>
   );
 }
-
