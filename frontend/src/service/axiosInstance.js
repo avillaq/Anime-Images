@@ -34,16 +34,15 @@ export const setupInterceptors = (useAuthStore) => {
       if (error.response?.status === 401 && error.response?.data?.error === "ExpiredRefreshError") {
         const { setLogout } = useAuthStore.getState();
         setLogout();
-        //window.location.href = "/login?expired=true";
         console.log("ExpiredRefreshError");
-        
       }
       return Promise.reject(error);
     }
   );
+
   axiosInstance.interceptors.request.use(
     async (config) => {
-      const { access_token, setAccessToken, setLogout } = useAuthStore.getState();
+      const { access_token, setAccessToken } = useAuthStore.getState();
   
       if (access_token) {
         const tokenData = jwtDecode(access_token);
@@ -65,9 +64,7 @@ export const setupInterceptors = (useAuthStore) => {
               return { ...config, headers: { ...config.headers, Authorization: `Bearer ${newToken}` }};
             } catch (error) {
               console.log(error);
-              
               processQueue(error, null);
-              setLogout();
               return Promise.reject(error);
             } finally {
               isRefreshing = false;
