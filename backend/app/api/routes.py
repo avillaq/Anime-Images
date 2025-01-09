@@ -6,6 +6,7 @@ import flask_praetorian
 from flask import jsonify, request, send_file
 import requests
 from io import BytesIO
+from PIL import Image 
 
 
 @bp.route("/")
@@ -82,7 +83,7 @@ def refresh():
 
 
 @bp.route("/user/favorites", methods=["GET"])   
-@limiter.limit("5/minute")
+#@limiter.limit("5/minute")
 @flask_praetorian.auth_required
 def get_favorites():
     user = flask_praetorian.current_user()
@@ -129,10 +130,21 @@ def add_favorite():
             "error": "Invalid image URL"
         }), 400
 
-    new_favorite = Favorite(
-        user_id=user_id,
-        image_url=image_url
-    )
+    try:
+        response = requests.get(image_url)
+        img = Image.open(BytesIO(response.content))
+        width, height = img.size
+        
+        new_favorite = Favorite(
+            user_id=user_id,
+            image_url=image_url,
+            width=width,
+            height=height
+        )
+    except:
+        return jsonify({
+            "error": "Image download failed"
+        }), 400
     try:
         db.session.add(new_favorite)
         db.session.commit()
