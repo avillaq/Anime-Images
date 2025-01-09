@@ -96,5 +96,3 @@ export const removeFromFavorites = async (imageUrl) => {
     return error.response.data;
   }
 };
-
-// TODO: Implement more API service functions 
