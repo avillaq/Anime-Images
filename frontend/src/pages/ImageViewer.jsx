@@ -86,7 +86,11 @@ export const ImageViewer = ({ type }) => {
     
 
     if (result.error) {
-      alert(result.error);
+      if (result.error === "ExpiredAccessError"){
+        alert("Session expired. Please login again.");
+      } else {
+        alert(result.error);
+      }
     } else {
       alert(result.message);
       // TODO: Show a toast message: resut.message
