@@ -86,18 +86,12 @@ def refresh():
 @flask_praetorian.auth_required
 def get_favorites():
     user = flask_praetorian.current_user()
-    page = request.args.get("page", 1, type=int)
-    per_page = 10 
 
-    favorites = Favorite.query.filter_by(user_id=user.id).order_by(Favorite.added_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
+    favorites = Favorite.query.filter_by(user_id=user.id).order_by(Favorite.added_at.desc())
 
     return jsonify({
-        "total": favorites.total,
-        "pages": favorites.pages,
-        "current_page": favorites.page,
-        "has_next": favorites.has_next,
-        "has_prev": favorites.has_prev,
-        "favorites": [favorite.format() for favorite in favorites.items]
+        "total": favorites.count(),
+        "favorites": [favorite.format() for favorite in favorites]
     }), 200
 
 @bp.route("/user/favorites/<path:image_url>", methods=["GET"])   
