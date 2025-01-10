@@ -22,7 +22,7 @@
   max-width: 500px;
 }
 
-div[data-slot^="content"] {
+div[role^="dialog"]  div[data-slot^="content"] {
   background-color: #19172c;
 }
 
