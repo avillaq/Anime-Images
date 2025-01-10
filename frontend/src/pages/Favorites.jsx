@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Gallery } from "react-grid-gallery";
 import { Button } from "@nextui-org/button";
+import { Tooltip } from "@nextui-org/tooltip";
 import Heart from "react-heart";
 import { fetchFavorites, removeFromFavorites, downloadImage } from "../service/apiService";
 import "../styles/Favorites.css";
@@ -63,20 +64,29 @@ export const Favorites = () => {
           height: favorite.height,
           customOverlay: (
             <div className="custom-overlay__caption">
-              <div className="image-overlay">
-                <Button color="danger" variant="bordered">
-                  <Heart
-                    isActive={true}
-                    onClick={() => removeImage(favorite.image_url)}
-                    animationScale={1.30}
-                    inactiveColor="white"
-                    activeColor="red"
-                  />
-                </Button>
-                <Button color="secondary" variant="ghost" className="text-inherit" isDisabled={isDownloading} onPress={() => onDownload(favorite.image_url)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px"><g strokeWidth="0" id="SVGRepo_bgCarrier"></g><g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Download"> <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path> </g> </g></svg>
-                </Button>
-              </div>
+              <Tooltip
+                content=
+                  {<div className="image-overlay">
+                    <Button color="danger" variant="bordered">
+                      <Heart
+                        isActive={true}
+                        onClick={() => removeImage(favorite.image_url)}
+                        animationScale={1.30}
+                        inactiveColor="white"
+                        activeColor="red"
+                      />
+                    </Button>
+                    <Button color="secondary" variant="ghost" className="text-inherit" isDisabled={isDownloading} onPress={() => onDownload(favorite.image_url)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px"><g strokeWidth="0" id="SVGRepo_bgCarrier"></g><g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Download"> <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path> </g> </g></svg>
+                    </Button>
+                  </div>}
+                color="foreground"
+                placement="bottom"
+                closeDelay={100000}
+                offset={5}
+              >
+                <Button color="foreground" className="text-black">...</Button>
+              </Tooltip>
             </div>
           )
         }));
@@ -109,6 +119,7 @@ export const Favorites = () => {
           enableImageSelection={false}
           rowHeight={280}
           margin={4}
+          thumbnailStyle={{ borderRadius: 10 }}
         />
       </div>
     </section>
