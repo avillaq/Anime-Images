@@ -17,7 +17,8 @@
 }
 
 div[role^="tooltip"]  div[data-slot^="content"] {
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px;
 }
 
 .image-overlay {
