@@ -11,33 +11,12 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-
-.image-container {
-  width: 100%;
-  height: 100%;
-}
-
-.gallery-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.custom-overlay__caption {
+  pointer-events: auto;
 }
 
 .image-overlay {
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  gap: 1rem;
   justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.image-container:hover .image-overlay {
-  opacity: 1;
-}
-
-.overlay-button {
-  backdrop-filter: blur(4px);
+  gap: 16px;
 }
