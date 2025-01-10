@@ -14,6 +14,13 @@ export const Favorites = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
 
+  const [slides, setSlides] = useState([]);
+  const [index, setIndex] = useState(-1);
+
+  const viewImage = (index, item) => {
+    setIndex(index);
+  }
+
   const removeImage = async (imageUrl) => {
     if (isRemoving) return;
     setIsRemoving(true);
@@ -87,13 +94,13 @@ export const Favorites = () => {
                 closeDelay={250}
                 offset={5}
               >
-                <Button 
-                color="foreground" 
-                className="text-black"
-                isIconOnly
-                radius="full"
-                size="sm"
-                variant="light"
+                <Button
+                  color="foreground"
+                  className="text-black"
+                  isIconOnly
+                  radius="full"
+                  size="sm"
+                  variant="light"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                     <circle cx="12" cy="12" r="2" />
@@ -118,6 +125,15 @@ export const Favorites = () => {
     loadFavorites();
   }, []);
 
+  useEffect(() => {
+    if (index > -1) {
+      setSlides(images.map(image => ({
+        src: image.src,
+        width: image.width,
+        height: image.height
+      })));
+    }
+  }, [images]);
 
 
   if (isLoading) return <div>Loading...</div>;
@@ -134,6 +150,13 @@ export const Favorites = () => {
           enableImageSelection={false}
           rowHeight={280}
           margin={4}
+          onClick={viewImage}
+        />
+        <Lightbox
+          slides={slides}
+          open={index >= 0}
+          index={index}
+          close={() => setIndex(-1)}
         />
       </div>
     </section>
