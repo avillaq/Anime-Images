@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Gallery } from "react-grid-gallery";
 import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/tooltip";
 import Heart from "react-heart";
@@ -17,7 +19,7 @@ export const Favorites = () => {
   const [slides, setSlides] = useState([]);
   const [index, setIndex] = useState(-1);
 
-  const viewImage = (index, item) => {
+  const viewImage = (index) => {
     setIndex(index);
   }
 
@@ -126,13 +128,12 @@ export const Favorites = () => {
   }, []);
 
   useEffect(() => {
-    if (index > -1) {
-      setSlides(images.map(image => ({
-        src: image.src,
-        width: image.width,
-        height: image.height
-      })));
-    }
+    const slds = images.map(({ original, width, height }) => ({
+      src: original,
+      width,
+      height,
+    }));
+    setSlides(slds);
   }, [images]);
 
 
@@ -157,6 +158,8 @@ export const Favorites = () => {
           open={index >= 0}
           index={index}
           close={() => setIndex(-1)}
+          plugins={[Zoom]}
+          controller={{ closeOnBackdropClick: true }}
         />
       </div>
     </section>
