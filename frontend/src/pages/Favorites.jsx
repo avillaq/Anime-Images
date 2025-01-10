@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Gallery } from "react-grid-gallery";
+import Lightbox from "yet-another-react-lightbox";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/tooltip";
 import Heart from "react-heart";
@@ -60,6 +61,7 @@ export const Favorites = () => {
 
         const formattedImages = data.favorites.map(favorite => ({
           src: favorite.image_url,
+          original: favorite.image_url,
           width: favorite.width,
           height: favorite.height,
           customOverlay: (
@@ -132,7 +134,6 @@ export const Favorites = () => {
           enableImageSelection={false}
           rowHeight={280}
           margin={4}
-          thumbnailStyle={{ borderRadius: 10 }}
         />
       </div>
     </section>
