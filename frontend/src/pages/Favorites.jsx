@@ -137,8 +137,16 @@ export const Favorites = () => {
   }, [images]);
 
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading || error) {
+    return (
+      <section className="favorites-container">
+        <div className="favorites-header-container">
+          {isLoading && <h1>{"Loading..."}</h1>}
+          {error && <h1>Error: {error}</h1>}
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="favorites-container">
