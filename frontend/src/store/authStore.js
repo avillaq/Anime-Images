@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 export const useAuthStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       access_token: null,
       isAuthenticated: false,
       favorites: new Set(),
@@ -11,13 +11,13 @@ export const useAuthStore = create(
         set({
           access_token,
           isAuthenticated: true,
-          favorites: new Set()
         });
       },
       setLogout: () =>
         set({
           access_token: null,
           isAuthenticated: false,
+          favorites: new Set()
         }),
       addFavorite: (imageUrl) =>
         set(state => ({
