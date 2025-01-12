@@ -8,8 +8,8 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Form } from "@nextui-org/form";
 import { useState } from "react";
-import { useAuthStore } from "../store/authStore";
-import { logIn, signUp } from "../service/apiService";
+import { useAuthStore, setFavorites } from "../store/authStore";
+import { logIn, signUp, fetchFavorites } from "../service/apiService";
 
 export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
   const { setAccessToken } = useAuthStore();
@@ -52,6 +52,12 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
     
     if (!result.error) {
       setAccessToken(result.access_token);
+
+      const favorites = await fetchFavorites();
+      if (!favorites.error) {
+        setFavorites(favorites.favorites.map(f => f.image_url));
+      }
+
       console.log(result.message);
       // TODO: Show a toast message: resut.message
 
