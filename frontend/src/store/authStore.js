@@ -34,7 +34,7 @@ export const useAuthStore = create(
         }),
       hasFavorite: (imageUrl) => {
         const fvts = get().favorites;
-        return fvts instanceof Set ? favorites.has(imageUrl) : false;
+        return fvts instanceof Set ? fvts.has(imageUrl) : false;
       },
       setFavorites: (favorites) =>
         set({
