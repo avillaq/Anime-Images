@@ -8,11 +8,11 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Form } from "@nextui-org/form";
 import { useState } from "react";
-import { useAuthStore, setFavorites } from "../store/authStore";
+import { useAuthStore } from "../store/authStore";
 import { logIn, signUp, fetchFavorites } from "../service/apiService";
 
 export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
-  const { setAccessToken } = useAuthStore();
+  const { setAccessToken, setFavorites } = useAuthStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
