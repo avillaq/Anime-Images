@@ -12,7 +12,7 @@ import { useAuthStore } from "../store/authStore";
 import { logIn, signUp, fetchFavorites } from "../service/apiService";
 
 export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
-  const { setAccessToken, setFavorites } = useAuthStore();
+  const { setAccessToken, setAuthtenticated, setFavorites } = useAuthStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -57,6 +57,8 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
       if (!favorites.error) {
         setFavorites(favorites.favorites.map(f => f.image_url));
       }
+
+      setAuthtenticated();
 
       console.log(result.message);
       // TODO: Show a toast message: resut.message
