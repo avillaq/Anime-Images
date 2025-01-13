@@ -52,12 +52,10 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
     
     if (!result.error) {
       setAccessToken(result.access_token);
-
       const favorites = await fetchFavorites();
       if (!favorites.error) {
         setFavorites(favorites.favorites.map(f => f.image_url));
       }
-
       setAuthtenticated();
 
       console.log(result.message);

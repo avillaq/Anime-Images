@@ -15,7 +15,6 @@ export const ImageViewer = ({ type }) => {
   const [isImageLoad, setIsImageLoad] = useState(true);
   const { isAuthenticated, hasFavorite, addFavorite, removeFavorite } = useAuthStore();
   const [isDownloading, setIsDownloading] = useState(false);
-  const [isToggleFavorites, setIsToggleFavorites] = useState(false);
 
   const [heartActive, setHeartActive] = useState(false);
 
@@ -62,8 +61,7 @@ export const ImageViewer = ({ type }) => {
       alert("You need to be logged in to add images to favorites.");
       return;
     }
-
-    setIsToggleFavorites(true);
+    
     const isCurrentlyFavorite = hasFavorite(image);
 
     if (isCurrentlyFavorite) {
@@ -97,7 +95,6 @@ export const ImageViewer = ({ type }) => {
         alert(result.error);
       }
     }
-    setIsToggleFavorites(false);
   };
 
   const onDownload = async () => {
@@ -154,7 +151,7 @@ export const ImageViewer = ({ type }) => {
           />
         </figure>
         <div className="image-viewer-action-container">
-          <Button color="danger" variant="bordered" isDisabled={!image || isToggleFavorites || !isImageLoad}>
+          <Button color="danger" variant="bordered" isDisabled={!image || !isImageLoad}>
             <Heart
               isActive={heartActive}
               onClick={() => toggleFavorites()}
