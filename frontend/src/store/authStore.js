@@ -9,10 +9,13 @@ export const useAuthStore = create(
       favorites: new Set(),
       setAccessToken: (access_token) => {
         set({
-          access_token,
-          isAuthenticated: true,
+          access_token
         });
       },
+      setAuthtenticated: () =>
+        set({
+          isAuthenticated : true
+        }),
       setLogout: () =>
         set({
           access_token: null,
