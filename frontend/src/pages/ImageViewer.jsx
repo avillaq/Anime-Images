@@ -13,7 +13,7 @@ export const ImageViewer = ({ type }) => {
   const [tags, setTags] = useState([]);
   const [image, setImage] = useState("");
   const [isImageLoad, setIsImageLoad] = useState(true);
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, hasFavorite, addFavorite, removeFavorite } = useAuthStore();
   const [isDownloading, setIsDownloading] = useState(false);
   const [isToggleFavorites, setIsToggleFavorites] = useState(false);
 
@@ -46,16 +46,7 @@ export const ImageViewer = ({ type }) => {
     if (!image || !isAuthenticated) {
       return;
     }
-
-    const checkFavorite = async () => {
-      const response = await fetchFavorite(image);
-      if (response.error) {
-        return;
-      }
-      setHeartActive(true);
-    };
-
-    checkFavorite();
+    setHeartActive(hasFavorite(image));
   }, [image]);
 
   const fetchImage = async () => {
@@ -65,7 +56,7 @@ export const ImageViewer = ({ type }) => {
     if (result.error) {
       alert(result.error);
       return;
-    } 
+    }
     setImage(result.image_url);
   };
 
@@ -76,28 +67,40 @@ export const ImageViewer = ({ type }) => {
     }
 
     setIsToggleFavorites(true);
+    const isCurrentlyFavorite = hasFavorite(image);
+
+    if (isCurrentlyFavorite) {
+      removeFavorite(image);
+      setHeartActive(false);
+    } else {
+      addFavorite(image);
+      setHeartActive(true);
+    }
+
     let result;
-    if (heartActive) {
+    if (isCurrentlyFavorite) {
       result = await removeFromFavorites(image);
     } else {
       result = await addToFavorites(image);
     }
     console.log(result);
-    
+
 
     if (result.error) {
-      if (result.error === "ExpiredAccessError"){
+      if (isCurrentlyFavorite) {
+        addFavorite(image);
+        setHeartActive(true);
+      } else {
+        removeFavorite(image);
+        setHeartActive(false);
+      }
+      if (result.error === "ExpiredAccessError") {
         alert("Session expired. Please login again.");
       } else {
         alert(result.error);
       }
-    } else {
-      alert(result.message);
-      // TODO: Show a toast message: resut.message
-      setHeartActive(!heartActive);
     }
     setIsToggleFavorites(false);
-
   };
 
   const onDownload = async () => {
