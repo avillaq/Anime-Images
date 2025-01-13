@@ -190,6 +190,15 @@ def get_download():
             "error": "Invalid image URL"
         }), 400
 
+    cached_response = cache.get(image_url)
+    if cached_response is not None:
+        return send_file(
+            BytesIO(cached_response["content"]),
+            mimetype=cached_response["content_type"],
+            as_attachment=True,
+            download_name=cached_response["filename"]
+        )
+
     try: 
         response = requests.get(image_url)
     except:
@@ -199,6 +208,12 @@ def get_download():
     
     filename = image_url.split("/")[-1]
     content_type = response.headers.get("Content-Type", "image/jpeg")
+
+    cache.set(image_url, {
+        "content": response.content,
+        "content_type": content_type,
+        "filename": filename
+    })
 
     return send_file(
         BytesIO(response.content),
