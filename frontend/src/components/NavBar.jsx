@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -25,18 +25,48 @@ export const NavBar = () => {
   const LoginModalController = useDisclosure();
   const RegisterModalController = useDisclosure();
   const { isAuthenticated, setLogout } = useAuthStore();
+  const [menuItems, setMenuItems] = useState([]);
 
-  const menuItems = [
-    "Sfw Images",
-    "Nsfw Images",
-    "Favorites",
-    "Log Out",
-  ];
+  useEffect(() => {
+    if (isAuthenticated) {
+      setMenuItems([
+        {
+          label: "Sfw Images",
+          href: "/image/sfw",
+          color: ""
+        },
+        {
+          label: "Nsfw Images",
+          href: "/image/nsfw",
+          color: ""
+        },
+        {
+          label: "Favorites",
+          href: "/user/favorites",
+          color: "danger"
+        }
+      ]);
+    } else {
+      setMenuItems([
+        {
+          label: "Sfw Images",
+          href: "/image/sfw",
+          color: ""
+        },
+        {
+          label: "Nsfw Images",
+          href: "/image/nsfw",
+          color: ""
+        }
+      ]);
+    }
+  }, [isAuthenticated]);
+
 
   const onLogout = async () => {
     try {
       const response = await logOut();
-      toast(response.message, { className: "success-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
+      toast(response.message, { className: "success-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 });
       setLogout();
     } catch (error) {
       console.error(error);
@@ -107,13 +137,14 @@ export const NavBar = () => {
       </NavbarContent>
       <NavbarMenu className="navbar-menu">
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem key={`${item.label}-${index}`}>
             <Link
               className="w-full text-inherit"
-              href="/"
+              href={item.href}
               size="lg"
+              color={item.color}
             >
-              {item}
+              {item.label}
             </Link>
           </NavbarMenuItem>
         ))}
