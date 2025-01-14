@@ -53,12 +53,24 @@ div[data-slot^="listboxWrapper"] {
 
 .error-toast {
   min-width: 200px;
-  padding: 10px 20px;
-  border-radius: 5px;
-  background: linear-gradient(130deg, #4e51d8 0%, #626ed4 50%, #4e51d8 100%);
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: linear-gradient(130deg, #f31260 0%, #ff4d82 50%, #f31260 100%);
+  box-shadow: 0 4px 12px rgba(243, 18, 96, 0.3);
   color: #fff;
   text-align: center;
+  font-weight: 500;
+}
+
+.success-toast {
+  min-width: 200px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: linear-gradient(130deg, #7828c8 0%, #9353d3 50%, #7828c8 100%);
+  box-shadow: 0 4px 12px rgba(147, 83, 211, 0.3);
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
