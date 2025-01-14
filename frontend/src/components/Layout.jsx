@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { NavBar } from "./NavBar";
+import { Footer } from "./Footer";
 import "../styles/Layout.css";
 export const Layout = () => {
   return (
@@ -12,6 +13,7 @@ export const Layout = () => {
           <Outlet />
         <div className='main-gradient'></div>
       </main>
+      <Footer />
     </>
   )
 }

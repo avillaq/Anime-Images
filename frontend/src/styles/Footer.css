@@ -1,0 +1,44 @@
+.footer-container {
+  color: #666;
+  background-color: rgba(8, 4, 17, .2);
+  backdrop-filter: blur(24px);
+  padding: 16px;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-separator {
+  opacity: 0.5;
+}
+
+.footer-link {
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-link:hover {
+  scale: 1.1;
+  color: #fff;
+}
+
+.github-icon {
+  fill: currentColor;
+}
+
+.footer-line {
+  mix-blend-mode: overlay;
+  background-image: linear-gradient(80deg, 
+    rgba(221, 221, 221, 0), 
+    rgba(255, 255, 255, .25) 52%, 
+    rgba(255, 255, 255, 0)
+  );
+  width: 100%;
+  height: 1px;
+  margin-bottom: 1rem;
+}
