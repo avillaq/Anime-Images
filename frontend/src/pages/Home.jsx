@@ -10,7 +10,10 @@ export const Home = () => {
       <div className="home-content-container">
         <h1>Random Anime Images</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque suscipit dicta assumenda iste doloribus ullam sit tempora ut excepturi placeat? Officiis qui ducimus debitis. Quisquam sed porro facilis possimus quis!
+          Discover and collect amazing anime images.
+          Browse through different categories including maid, waifu, characters, and more.
+          Create an account to save your favorite images and build your personal collection.
+          Choose between SFW content or NSFW content based on your preferences.
         </p>
         <div className="home-button-container">
           <Button as={Link} href="/image/sfw" color="secondary">Get anime SFW Image</Button>
@@ -19,7 +22,7 @@ export const Home = () => {
       </div>
       <figure className="home-image-container">
         <Image
-          alt="Anime Image"
+          alt="Welcome Anime Image"
           src={WelcomeImage}
           draggable={false}
         />
@@ -27,3 +30,4 @@ export const Home = () => {
     </section>
   )
 }
+
