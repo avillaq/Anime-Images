@@ -1,5 +1,5 @@
 .home-container {
-  padding: 3rem 0;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -36,13 +36,13 @@
 
 @media (min-width: 768px) {
   .home-container {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
 }
 
 @media (min-width: 1024px) {
   .home-container {
-    padding: 6rem 0;
+    padding: 4rem 0;
     flex-direction: row;
   }
 }
