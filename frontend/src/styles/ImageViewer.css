@@ -51,6 +51,16 @@ div[data-slot^="listboxWrapper"] {
   gap: 16px;
 }
 
+.error-toast {
+  min-width: 200px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: linear-gradient(130deg, #4e51d8 0%, #626ed4 50%, #4e51d8 100%);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .image-viewer-container {
     padding: 3rem 0;

@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
-import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
 import { Spinner } from "@nextui-org/spinner";
+import toast from "react-simple-toasts";
+import "react-simple-toasts/dist/style.css";
 import { fetchTags, fetchRandomImage, downloadImage, addToFavorites, removeFromFavorites } from "../service/apiService";
 import { useAuthStore } from "../store/authStore";
 import Heart from "react-heart";
@@ -59,7 +61,7 @@ export const ImageViewer = ({ type }) => {
 
   const toggleFavorites = async () => {
     if (!isAuthenticated) {
-      alert("You need to be logged in to add images to favorites.");
+      toast("Please login to add favorites", { className: "error-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
       return;
     }
 
