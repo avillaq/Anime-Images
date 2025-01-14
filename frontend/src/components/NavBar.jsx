@@ -44,7 +44,7 @@ export const NavBar = () => {
   }
 
   return (
-    <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} className="navbar-container">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="navbar-container">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
