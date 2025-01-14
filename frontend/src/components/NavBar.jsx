@@ -12,6 +12,8 @@ import { useDisclosure } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { Image } from "@nextui-org/image";
+import toast from "react-simple-toasts";
+import "react-simple-toasts/dist/style.css";
 import { LoginSignUpModal } from "./LoginSignUpModal";
 import { useAuthStore } from "../store/authStore";
 import { logOut } from "../service/apiService";
@@ -34,7 +36,7 @@ export const NavBar = () => {
   const onLogout = async () => {
     try {
       const response = await logOut();
-      console.log(response.message);
+      toast(response.message, { className: "success-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
       setLogout();
     } catch (error) {
       console.error(error);

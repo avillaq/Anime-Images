@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -7,7 +8,8 @@ import {
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Form } from "@nextui-org/form";
-import { useState } from "react";
+import toast from "react-simple-toasts";
+import "react-simple-toasts/dist/style.css";
 import { useAuthStore } from "../store/authStore";
 import { logIn, signUp, fetchFavorites } from "../service/apiService";
 
@@ -58,8 +60,7 @@ export const LoginSignUpModal = ({ isOpen, onOpenChange, mode }) => {
       }
       setAuthtenticated();
 
-      console.log(result.message);
-      // TODO: Show a toast message: resut.message
+      toast(result.message, { className: "success-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
 
       resetStates();
     }

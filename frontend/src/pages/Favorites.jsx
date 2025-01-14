@@ -36,7 +36,7 @@ export const Favorites = () => {
     try {
       const result = await removeFromFavorites(imageUrl);
       if (result.error) {
-        alert(result.error);
+        toast(result.error, { className: "error-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
         loadFavorites();
       }
     } catch (error) {

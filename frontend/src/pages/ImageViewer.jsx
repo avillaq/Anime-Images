@@ -25,7 +25,7 @@ export const ImageViewer = ({ type }) => {
     const getTags = async () => {
       const result = await fetchTags();
       if (result.error) {
-        alert(result.error);
+        toast(result.error, { className: "error-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
         return;
       }
       const formattedTags = result[type].map((tag) => ({
@@ -53,7 +53,7 @@ export const ImageViewer = ({ type }) => {
     setIsImageLoad(false);
     const result = await fetchRandomImage(type, category);
     if (result.error) {
-      alert(result.error);
+      toast(result.error, { className: "error-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
       return;
     }
     setImage(result.image_url);
@@ -81,8 +81,6 @@ export const ImageViewer = ({ type }) => {
     } else {
       result = await addToFavorites(image);
     }
-    console.log(result);
-
 
     if (result.error) {
       if (isCurrentlyFavorite) {
@@ -93,9 +91,9 @@ export const ImageViewer = ({ type }) => {
         setHeartActive(false);
       }
       if (result.error === "ExpiredAccessError") {
-        alert("Session expired. Please login again.");
+        toast("Session expired. Please login again.", { className: "error-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
       } else {
-        alert(result.error);
+        toast(result.error, { className: "error-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
       }
     }
   };
@@ -118,7 +116,7 @@ export const ImageViewer = ({ type }) => {
       link.remove();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      alert("Failed to download image.");
+      toast("Failed to download image.", { className: "error-toast", position: "bottom-right", maxVisibleToasts: 3, clickClosable: true, duration: 2000 }); 
     } finally {
       setIsDownloading(false);
     }
