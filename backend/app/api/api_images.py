@@ -69,9 +69,14 @@ def get_tags():
     sfw_tags = set(IMAGES_TAGS["waifu.im"]["sfw"] + IMAGES_TAGS["waifu.pics"]["sfw"])
     nsfw_tags = set(IMAGES_TAGS["waifu.im"]["nsfw"] + IMAGES_TAGS["waifu.pics"]["nsfw"])
 
+    ordered_sfw_tags = list(sfw_tags)
+    ordered_sfw_tags.sort()
+    ordered_nsfw_tags = list(nsfw_tags)
+    ordered_nsfw_tags.sort()
+
     return {
-        "sfw": list(sfw_tags),
-        "nsfw": list(nsfw_tags)
+        "sfw": ordered_sfw_tags,
+        "nsfw": ordered_nsfw_tags
     }
 
 
