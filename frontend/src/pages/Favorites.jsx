@@ -5,7 +5,7 @@ import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/tooltip";
-import {Spinner} from "@nextui-org/spinner";
+import { Spinner } from "@nextui-org/spinner";
 import Heart from "react-heart";
 import { fetchFavorites, removeFromFavorites, downloadImage } from "../service/apiService";
 import "../styles/Favorites.css";
@@ -149,7 +149,7 @@ export const Favorites = () => {
     return (
       <section className="favorites-container">
         <div className="favorites-header-container">
-          {isLoading && <Spinner size="lg" color="danger" label="Loading..." classNames={{label:"text-inherit"}}/>}
+          {isLoading && <Spinner size="lg" color="danger" label="Loading..." classNames={{ label: "text-inherit" }} />}
           {error && <h1>{error}</h1>}
         </div>
       </section>

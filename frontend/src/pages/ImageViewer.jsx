@@ -2,6 +2,7 @@ import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { Image } from "@nextui-org/image";
+import { Spinner } from "@nextui-org/spinner";
 import { fetchTags, fetchRandomImage, downloadImage, addToFavorites, removeFromFavorites } from "../service/apiService";
 import { useAuthStore } from "../store/authStore";
 import Heart from "react-heart";
@@ -40,7 +41,7 @@ export const ImageViewer = ({ type }) => {
       setHeartActive(false);
       return;
     }
-    if (image) {    
+    if (image) {
       setHeartActive(hasFavorite(image));
     }
   }, [isAuthenticated, image]);
@@ -61,7 +62,7 @@ export const ImageViewer = ({ type }) => {
       alert("You need to be logged in to add images to favorites.");
       return;
     }
-    
+
     const isCurrentlyFavorite = hasFavorite(image);
 
     if (isCurrentlyFavorite) {
@@ -161,7 +162,13 @@ export const ImageViewer = ({ type }) => {
             />
           </Button>
           <Button color="secondary" variant="ghost" className="text-inherit" isDisabled={!image || isDownloading || !isImageLoad} onPress={onDownload}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px"><g strokeWidth="0" id="SVGRepo_bgCarrier"></g><g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Download"> <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path> </g> </g></svg>
+            {
+              isDownloading ?
+                <Spinner size="sm" color="default"/>
+                :
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px"><g strokeWidth="0" id="SVGRepo_bgCarrier"></g><g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Download"> <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path> </g> </g></svg>
+            }
+
           </Button>
         </div>
 
