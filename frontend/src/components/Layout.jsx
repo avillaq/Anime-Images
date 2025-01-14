@@ -4,7 +4,7 @@ import { Footer } from "./Footer";
 import "../styles/Layout.css";
 export const Layout = () => {
   return (
-    <>
+    <div className="layout-wrapper">
       <header className="header-container">
         <NavBar />
         <div className="navbar-line"></div>
@@ -14,6 +14,6 @@ export const Layout = () => {
         <div className='main-gradient'></div>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }

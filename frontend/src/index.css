@@ -15,13 +15,11 @@ html {
   -ms-overflow-style: none;
 }
 body {
-  /*font-family: var(--font-family);*/
   line-height: 1.6;
   margin: 0;
   padding: 0;
   color: #fff;
   background-color: #080411;
-  min-height: 100vh;
   overflow-x: hidden;
 }
 
