@@ -33,17 +33,17 @@ export const NavBar = () => {
         {
           label: "Sfw Images",
           href: "/image/sfw",
-          color: ""
+          color: "text-white"
         },
         {
           label: "Nsfw Images",
           href: "/image/nsfw",
-          color: ""
+          color: "text-inherit"
         },
         {
           label: "Favorites",
           href: "/user/favorites",
-          color: "danger"
+          color: "text-[#f31260]"
         }
       ]);
     } else {
@@ -51,12 +51,12 @@ export const NavBar = () => {
         {
           label: "Sfw Images",
           href: "/image/sfw",
-          color: ""
+          color: "text-inherit"
         },
         {
           label: "Nsfw Images",
           href: "/image/nsfw",
-          color: ""
+          color: "text-inherit"
         }
       ]);
     }
@@ -139,10 +139,9 @@ export const NavBar = () => {
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.label}-${index}`}>
             <Link
-              className="w-full text-inherit"
+              className={`w-full ${item.color}`}
               href={item.href}
               size="lg"
-              color={item.color}
             >
               {item.label}
             </Link>
