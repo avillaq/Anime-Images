@@ -25,6 +25,7 @@ export const Home = () => {
           alt="Welcome Anime Image"
           src={WelcomeImage}
           draggable={false}
+          width={650}
         />
       </figure>
     </section>
