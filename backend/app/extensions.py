@@ -5,7 +5,10 @@ from flask_caching import Cache
 from flask_cors import CORS
 from flask_praetorian import Praetorian
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Conection to the database
 db = SQLAlchemy()
 
@@ -18,7 +21,20 @@ limiter = Limiter(
 cache = Cache()
 
 # Configuration for CORS
-cors = CORS()
+cors = CORS(  
+    resources={
+        r"/api/*": {
+            "origins": [
+                os.getenv('DEVELOPMENT_HOST'),
+                os.getenv('PRODUCTION_HOST')
+            ],
+            "methods": ["GET", "POST", "PUT", "DELETE"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "expose_headers": ["Content-Range", "X-Content-Range"],
+            "supports_credentials": True
+        }
+    }
+)
 
 # Configuration for JWT
 class TokenBlacklist:

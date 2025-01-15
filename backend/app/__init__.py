@@ -11,14 +11,7 @@ def create_app():
     cache.init_app(app, config = {
         "CACHE_TYPE": "SimpleCache"
     })
-    cors.init_app(app, 
-                resources=r"/api/*",
-                origins=["*"],
-                methods=["GET", "POST", "PUT", "DELETE"],
-                allow_headers = ["Content-Type", "Authorization"],
-                expose_headers = ["Content-Range", "X-Content-Range"],
-                supports_credentials=False,
-        )
+    cors.init_app(app)
 
     guard.init_app(app, User,is_blacklisted=blacklist.is_blacklisted)
 
