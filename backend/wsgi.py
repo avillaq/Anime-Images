@@ -8,4 +8,4 @@ def index_api():
     return redirect("/api")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
