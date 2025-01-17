@@ -151,7 +151,8 @@ def add_favorite():
     try:
         db.session.add(new_favorite)
         db.session.commit()
-    except:
+    except Exception as e:
+        print(e)
         db.session.rollback()
         return jsonify({
             "error": "Image already exists in favorites"
