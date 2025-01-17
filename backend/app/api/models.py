@@ -18,7 +18,8 @@ class User(db.Model):
     def format(self):
         return {
             "id": self.id,
-            "username": self.username
+            "username": self.username,
+            "created_at": self.created_at
         }
     
     @property
@@ -59,7 +60,9 @@ class Favorite(db.Model):
 
     def format(self):
         return {
+            "user_id": self.user_id,
             "image_url": self.image_url,
             "width": self.width,
-            "height": self.height
+            "height": self.height,
+            "added_at": self.added_at
         }
