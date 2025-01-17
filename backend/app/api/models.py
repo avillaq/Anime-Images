@@ -6,7 +6,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     hashed_password = db.Column(db.Text, nullable=True)
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    created_at = db.Column(db.DateTime(timezone=True), server_default=db.func.now())
 
     MAX_FAVORITES = 50
 
@@ -47,11 +47,11 @@ class Favorite(db.Model):
     __tablename__ = "favorites"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     image_url = db.Column(db.String(255), nullable=False)
     width = db.Column(db.Integer)
     height = db.Column(db.Integer)
-    added_at = db.Column(db.DateTime, server_default=db.func.now())
+    added_at = db.Column(db.DateTime(timezone=True), server_default=db.func.now())
 
     __table_args__ = (db.UniqueConstraint("user_id", "image_url", name="user_id_image_url"),)
 
