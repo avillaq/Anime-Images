@@ -7,7 +7,10 @@ from flask import jsonify, request, send_file
 import requests
 from io import BytesIO
 from PIL import Image 
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 @bp.route("/")
 def home():
@@ -241,6 +244,59 @@ def get_image():
 def get_all_tags():
     tags = get_tags()
     return jsonify(tags), 200
+
+
+@bp.route("/admin/users", methods=["GET"])
+def get_all_users():
+    secret_key = request.args.get("secret_key")
+    if not secret_key or secret_key != os.getenv("SECRET_KEY"):
+        return jsonify({
+            "error": "Invalid Secret key"
+        }), 401
+        
+    users = User.query.all()
+    return jsonify({
+        "total": len(users),
+        "users": [user.format() for user in users]
+    }), 200
+
+
+@bp.route("/admin/favorites", methods=["GET"])
+def get_all_favorites():
+    secret_key = request.args.get("secret_key")
+    if not secret_key or secret_key != os.getenv("SECRET_KEY"):
+        return jsonify({
+            "error": "Invalid Secret key"
+        }), 401
+        
+    favorites = Favorite.query.all()
+    return jsonify({
+        "total": len(favorites),
+        "favorites": [favorite.format() for favorite in favorites]
+    }), 200
+
+
+@bp.route("/admin/users/<int:user_id>/favorites", methods=["GET"])
+def get_user_favorites(user_id):
+    secret_key = request.args.get("secret_key")
+    if not secret_key or secret_key != os.getenv("SECRET_KEY"):
+        return jsonify({
+            "error": "Invalid Secret key"
+        }), 401
+
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({
+            "error": "User not found"
+        }), 404
+        
+    favorites = Favorite.query.filter_by(user_id=user_id).all()
+    return jsonify({
+        "id": user.id,
+        "username": user.username,
+        "total": len(favorites),
+        "favorites": [favorite.format() for favorite in favorites]
+    }), 200
 
 
 @bp.errorhandler(429)
