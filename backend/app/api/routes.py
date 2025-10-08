@@ -9,6 +9,7 @@ from io import BytesIO
 from PIL import Image 
 from dotenv import load_dotenv
 import os
+from sqlalchemy import func
 
 load_dotenv()
 
@@ -17,6 +18,23 @@ def home():
     return jsonify({
         "message": "Welcome to the Anime Images API"
     }), 200
+
+@bp.route("/db/health", methods=["GET"])
+def health_check():
+    try:
+        result = db.session.execute(db.select(func.now()))
+        
+        return jsonify({
+            "status": "healthy",
+            "database": "connected",
+            "timestamp": str(result.scalar())
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "unhealthy", 
+            "database": "disconnected",
+            "error": str(e)
+        }), 503
 
 
 @bp.route("/auth/register", methods=["POST"])
